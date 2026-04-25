@@ -10,7 +10,7 @@ export const ChatBot = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
@@ -59,10 +59,12 @@ export const ChatBot = () => {
     }
   };
 
+  /*
   const handleSearchClick = (_query: string) => {
     setIsOpen(false);
     navigate(`/result?q=${encodeURIComponent(_query)}`);
   };
+  */
 
   const renderMessageContent = (content: string) => {
     // Simple parser to extract potential medicine names for quick search
