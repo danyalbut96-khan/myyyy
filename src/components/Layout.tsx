@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe } from 'lucide-react';
+import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe, Pill } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChatBot } from './ChatBot';
 
@@ -41,12 +41,17 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="nav-content">
+      <div className="nav-content flex items-center justify-between w-full">
         <Link to="/" className="logo" onClick={closeMenu}>
-          MediFinder <span>AI</span>
+          <div className="flex items-center gap-2">
+            <div className="logo-icon">
+              <Pill size={24} />
+            </div>
+            <span>MediFinder <span className="text-primary-accent">AI</span></span>
+          </div>
         </Link>
         
-        <div className={`nav-links ${menuOpen ? 'open' : 'hidden md:flex'}`} style={menuOpen ? { position: 'absolute', top: 68, left: 0, right: 0, background: 'var(--surface)', padding: 20, flexDirection: 'column', borderBottom: '1px solid var(--border)' } : {}}>
+        <div className={`nav-links ${menuOpen ? 'open' : 'hidden lg:flex'}`}>
           <Link to="/" className="nav-pill" onClick={closeMenu}>
             <Search size={16} /> {isUrdu ? 'تلاش' : 'Search'}
           </Link>
@@ -71,8 +76,8 @@ const Navbar = () => {
           </button>
         </div>
 
-        <button className="md:hidden flex items-center" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button className="lg:hidden flex items-center p-2 rounded-full hover:bg-gray-100" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
     </nav>
