@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { Key, Save, CheckCircle2 } from 'lucide-react';
 import { getApiKey, setApiKey } from '../services/api';
 
@@ -13,7 +13,7 @@ export const Settings = () => {
     }
   }, []);
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = (e: FormEvent) => {
     e.preventDefault();
     if (key.trim()) {
       setApiKey(key.trim());

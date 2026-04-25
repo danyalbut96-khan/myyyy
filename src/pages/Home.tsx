@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Pill, ArrowRight } from 'lucide-react';
 import { hasApiKey } from '../services/api';
@@ -9,7 +9,7 @@ export const Home = () => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     if (!query.trim()) return;
     
