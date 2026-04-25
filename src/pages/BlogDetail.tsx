@@ -64,7 +64,7 @@ export const BlogDetail = () => {
           </div>
 
           {/* Article Text */}
-          <div className="markdown-content" style={{ fontSize: '18px', lineHeight: 1.8, color: '#333' }}>
+          <div className="markdown-content" style={{ fontSize: '18px', lineHeight: 1.8, color: 'var(--text-main)' }}>
             {blog.content.split('\n\n').map((paragraph, idx) => (
               <p key={idx} style={{ marginBottom: '24px' }}>{paragraph}</p>
             ))}
@@ -78,7 +78,7 @@ export const BlogDetail = () => {
           )}
 
           {/* Share Section */}
-          <div style={{ marginTop: '60px', padding: '32px', backgroundColor: '#f8f9fa', borderRadius: '24px', border: '1px solid var(--border)' }}>
+          <div style={{ marginTop: '60px', padding: '32px', backgroundColor: 'var(--surface-alt)', borderRadius: '24px', border: '1px solid var(--border)' }}>
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div>
                 <h3 style={{ marginBottom: '8px' }}>{isUrdu ? 'اس مضمون کو شیئر کریں' : 'Share this article'}</h3>
@@ -109,7 +109,7 @@ export const BlogDetail = () => {
       </article>
 
       {/* Related Blogs */}
-      <section className="bg-light" style={{ padding: '80px 0' }}>
+      <section style={{ backgroundColor: 'var(--surface-alt)', padding: '80px 0' }}>
         <div className="container">
           <h2 className="mb-8">{isUrdu ? 'مزید مضامین' : 'Related Articles'}</h2>
           <div className="news-grid">

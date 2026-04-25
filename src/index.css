@@ -26,6 +26,23 @@
   --transition: all 0.2s ease;
 }
 
+[data-theme="dark"] {
+  /* Dark Mode Tokens (Minimal & Vibrant) */
+  --bg-color: #0f172a; /* Slate 950 */
+  --surface: #1e293b; /* Slate 800 */
+  --surface-alt: #334155; /* Slate 700 */
+  --text-main: #f8fafc; /* Slate 50 */
+  --text-muted: #94a3b8; /* Slate 400 */
+  --border: #334155; /* Slate 700 */
+  --accent-primary: #2dd4bf; /* Teal 400 */
+  --accent-secondary: #5eead4; /* Teal 300 */
+  --accent-muted: rgba(45, 212, 191, 0.1);
+  --header-bg: rgba(15, 23, 42, 0.8);
+  --card-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  --input-bg: #1e293b;
+  --input-border: #334155;
+}
+
 html[dir="rtl"] {
   --font-heading: 'Noto Nastaliq Urdu', serif;
   --font-body: 'Noto Nastaliq Urdu', serif;
@@ -35,12 +52,13 @@ html[dir="rtl"] {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-color);
-  color: var(--text-primary);
+  color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -1056,7 +1074,7 @@ html[dir="rtl"] .search-submit {
 
 /* Coming Soon Section */
 .coming-soon-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-alt) 100%);
   border: 2px dashed var(--border);
   border-radius: 24px;
   padding: 40px;
@@ -1077,8 +1095,8 @@ html[dir="rtl"] .search-submit {
 }
 
 .skeleton-loading {
-  background: #eee;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background: var(--surface-alt);
+  background: linear-gradient(110deg, var(--surface) 8%, var(--surface-alt) 18%, var(--surface) 33%);
   border-radius: 5px;
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;

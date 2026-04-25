@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe, Pill } from 'lucide-react';
+import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe, Pill, Moon, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChatBot } from './ChatBot';
 
@@ -17,8 +17,10 @@ const DisclaimerBar = () => {
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isUrdu, setIsUrdu] = useState(false);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
+    // Language setup
     const lang = localStorage.getItem('medifinder_lang');
     if (lang === 'ur') {
       setIsUrdu(true);
@@ -29,12 +31,24 @@ const Navbar = () => {
       document.documentElement.dir = 'ltr';
       document.documentElement.lang = 'en';
     }
+
+    // Theme setup
+    const savedTheme = localStorage.getItem('medifinder_theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   const toggleLanguage = () => {
     const newLang = isUrdu ? 'en' : 'ur';
     localStorage.setItem('medifinder_lang', newLang);
     window.location.reload();
+  };
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('medifinder_theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
   };
 
   const closeMenu = () => setMenuOpen(false);
@@ -52,11 +66,14 @@ const Navbar = () => {
         </Link>
         
         <div className="flex items-center gap-2">
+          <button onClick={toggleTheme} className="nav-pill" style={{ padding: '8px', borderRadius: '50%', width: 36, height: 36, justifyContent: 'center' }}>
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
           <button onClick={toggleLanguage} className="nav-pill" style={{ padding: '6px 12px', fontSize: 12 }}>
             <Globe size={14} /> {isUrdu ? 'EN' : 'UR'}
           </button>
 
-          <button className="flex items-center p-2 rounded-full hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(true)}>
+          <button className="flex items-center p-2 rounded-full hover:bg-muted transition-colors" onClick={() => setMenuOpen(true)}>
             <Menu size={24} />
           </button>
         </div>

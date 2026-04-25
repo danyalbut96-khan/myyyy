@@ -254,7 +254,7 @@ export const Home = () => {
       </section>
 
       {/* Feature Cards Row */}
-      <section className="section" style={{ backgroundColor: 'white', borderTop: '1px solid var(--border)' }}>
+      <section className="section" style={{ backgroundColor: 'var(--bg-color)', borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <div className="features-grid">
             <div className="feature-card">
