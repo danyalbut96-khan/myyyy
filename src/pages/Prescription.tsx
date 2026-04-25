@@ -189,7 +189,30 @@ export const Prescription = () => {
               <ArrowRight size={20} /> {isUrdu ? 'پہلی دوا تلاش کریں' : 'Search First Medicine'}
             </button>
           </div>
-        )}
+        {/* FAQ Section */}
+        <div className="max-w-3xl mx-auto mt-20 pt-10 border-t" style={{ borderColor: 'var(--border)' }}>
+          <h2 className="text-center mb-10" style={{ fontSize: 28 }}>{isUrdu ? 'اکثر پوچھے گئے سوالات' : 'Frequently Asked Questions'}</h2>
+          <div className="flex flex-col gap-6">
+            <div className="info-card">
+              <h4 style={{ marginBottom: 12 }}>{isUrdu ? 'نسخہ کیسے اپ لوڈ کریں؟' : 'How do I upload my prescription?'}</h4>
+              <p className="text-muted">{isUrdu 
+                ? 'اپنے نسخے کی تصویر کھینچیں یا پی ڈی ایف فائل اپ لوڈ کریں۔ یقینی بنائیں کہ لکھائی صاف اور پڑھنے کے قابل ہے۔' 
+                : 'Simply take a clear photo of your prescription or upload a PDF file. Ensure the handwriting is legible and the lighting is good for the best results.'}</p>
+            </div>
+            <div className="info-card">
+              <h4 style={{ marginBottom: 12 }}>{isUrdu ? 'کیا میری معلومات محفوظ ہیں؟' : 'Is my data secure?'}</h4>
+              <p className="text-muted">{isUrdu 
+                ? 'جی ہاں، ہم آپ کی تصاویر کو محفوظ نہیں کرتے۔ تجزیہ کے بعد فائل فوری طور پر ڈیلیٹ کر دی جاتی ہے۔' 
+                : 'Yes. We process your images in real-time and do not store them on our servers. Your privacy is our top priority.'}</p>
+            </div>
+            <div className="info-card">
+              <h4 style={{ marginBottom: 12 }}>{isUrdu ? 'کیا اے آئی غلطی کر سکتی ہے؟' : 'Can the AI make mistakes?'}</h4>
+              <p className="text-muted">{isUrdu 
+                ? 'اے آئی بہت درست ہے لیکن یہ سو فیصد یقینی نہیں ہے۔ ہمیشہ ڈاکٹر کی ہدایت پر عمل کریں۔' 
+                : 'While our AI is highly advanced, handwriting can sometimes be misinterpreted. Always verify the results with a qualified pharmacist or doctor.'}</p>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

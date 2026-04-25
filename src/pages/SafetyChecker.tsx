@@ -90,7 +90,29 @@ export const SafetyChecker = () => {
                 </div>
               </div>
             </div>
-          )}
+        {/* FAQ & Instructions */}
+        <div className="max-w-2xl mx-auto mt-16 pt-10 border-t" style={{ borderColor: 'var(--border)' }}>
+          <h2 className="text-center mb-8" style={{ fontSize: 24 }}>{isUrdu ? 'استعمال کرنے کا طریقہ' : 'How to Use'}</h2>
+          <div className="flex flex-col gap-4">
+            <div className="info-card" style={{ padding: 24 }}>
+              <h4 style={{ marginBottom: 8 }}>1. {isUrdu ? 'ادویات درج کریں' : 'Enter Medicines'}</h4>
+              <p className="text-muted" style={{ fontSize: 14 }}>{isUrdu 
+                ? 'ان دو ادویات کے نام لکھیں جن کا آپ تعامل چیک کرنا چاہتے ہیں۔' 
+                : 'Type the names of the two medications you want to check for potential interactions.'}</p>
+            </div>
+            <div className="info-card" style={{ padding: 24 }}>
+              <h4 style={{ marginBottom: 8 }}>2. {isUrdu ? 'تجزیہ دیکھیں' : 'Review Severity'}</h4>
+              <p className="text-muted" style={{ fontSize: 14 }}>{isUrdu 
+                ? 'اے آئی آپ کو بتائے گا کہ آیا تعامل معمولی ہے یا شدید۔' 
+                : 'The AI will analyze the chemical compositions and provide a severity rating (Mild to Severe).'}</p>
+            </div>
+            <div className="info-card" style={{ padding: 24 }}>
+              <h4 style={{ marginBottom: 8 }}>3. {isUrdu ? 'مشورہ لیں' : 'Follow Recommendation'}</h4>
+              <p className="text-muted" style={{ fontSize: 14 }}>{isUrdu 
+                ? 'دی گئی ہدایات پر عمل کریں اور شک کی صورت میں ڈاکٹر سے بات کریں۔' 
+                : 'Carefully read the provided advice and always consult your doctor if you have concerns.'}</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
