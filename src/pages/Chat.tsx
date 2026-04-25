@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Pill, Send, Plus, Image as ImageIcon, X } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { chatWithBot } from '../services/api';
 import type { ChatMessage, ChatSession } from '../types';
 
@@ -233,7 +235,17 @@ export const Chat = () => {
                     <img src={msg.imageUrl} alt="Uploaded content" style={{ maxWidth: '100%', maxHeight: 300, display: 'block' }} />
                   </div>
                 )}
-                {msg.content && <div style={{ whiteSpace: 'pre-wrap', fontSize: 16, lineHeight: 1.5 }}>{msg.content}</div>}
+                {msg.content && (
+                  <div className="markdown-content" style={{ fontSize: 16, lineHeight: 1.6 }}>
+                    {msg.role === 'assistant' ? (
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {msg.content}
+                      </ReactMarkdown>
+                    ) : (
+                      <div style={{ whiteSpace: 'pre-wrap' }}>{msg.content}</div>
+                    )}
+                  </div>
+                )}
                 <div style={{ fontSize: 11, opacity: 0.6, marginTop: 2, textAlign: msg.role === 'user' ? 'right' : 'left' }}>
                   {msg.timestamp}
                 </div>

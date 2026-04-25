@@ -916,6 +916,41 @@ html[dir="rtl"] .search-submit {
   box-shadow: 0 4px 12px rgba(27, 94, 59, 0.3);
 }
 
+/* Markdown Content Styling */
+.markdown-content h1, 
+.markdown-content h2, 
+.markdown-content h3 {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: inherit;
+}
+.markdown-content h3 { font-size: 1.1rem; }
+.markdown-content p {
+  margin-bottom: 8px;
+}
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+.markdown-content ul, 
+.markdown-content ol {
+  margin-bottom: 12px;
+  padding-left: 20px;
+}
+.markdown-content li {
+  margin-bottom: 4px;
+}
+.markdown-content strong {
+  font-weight: 700;
+}
+.markdown-content blockquote {
+  border-left: 4px solid var(--accent-primary);
+  padding-left: 12px;
+  margin: 12px 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
 /* Pharmacy Card */
 .pharmacy-card {
   background-color: var(--surface);
