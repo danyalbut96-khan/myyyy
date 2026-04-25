@@ -2,6 +2,10 @@
 
 MediFinder AI is a professional, high-performance medicine search engine and medical assistant platform. It leverages advanced Artificial Intelligence to provide instant, comprehensive details about medications, including compositions, dosages, side effects, and therapeutic alternatives.
 
+**Team Name**: UNKNOWN  
+**Team Lead**: M. Majid Khan  
+**Documentation**: [Detailed Project Report](./PROJECT_DOCUMENTATION.md) | [Presentation Slides](./PRESENTATION_SLIDES.md)
+
 ## 🚀 Key Features
 
 - **AI-Powered Search**: Instant retrieval of structured medical data using OpenRouter (Claude AI / GPT-4o).

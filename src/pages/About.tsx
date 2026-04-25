@@ -17,10 +17,10 @@ export const About = () => {
       link: 'https://mustafa-hussain-portfolio.vercel.app/'
     },
     {
-      name: 'Shayan Abbas',
-      role: 'Lead Developer',
-      bio: 'BSc Software Engineering student focused on modern software architectures and high-impact digital products.',
-      link: 'https://www.linkedin.com/in/shahyan-abbas-01b445404?utm_source=share_via&utm_content=profile&utm_medium=member_android'
+      name: 'M. Majid Khan',
+      role: 'Team Lead',
+      bio: 'BSc Software Engineering student focused on modern software architectures, leadership, and high-impact digital products.',
+      link: '#'
     }
   ];
 
