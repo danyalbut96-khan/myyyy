@@ -1,4 +1,4 @@
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChatBot } from './ChatBot';

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Scale, ArrowRight } from 'lucide-react';
+import { Scale } from 'lucide-react';
 import { fetchMedicineDetails } from '../services/api';
 
 export const Compare = () => {
@@ -10,7 +10,7 @@ export const Compare = () => {
   const initialGeneric = searchParams.get('generic') || '';
 
   const [brand, setBrand] = useState(initialBrand);
-  const [generic, setGeneric] = useState(initialGeneric);
+  // const [generic, setGeneric] = useState(initialGeneric);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
@@ -27,7 +27,7 @@ export const Compare = () => {
       const res = await fetchMedicineDetails(queryBrand);
       if (res.genericVsBrand) {
         setResult(res.genericVsBrand);
-        setGeneric(res.genericVsBrand.genericName);
+        // setGeneric(res.genericVsBrand.genericName);
       }
     } catch (e) {
       console.error(e);

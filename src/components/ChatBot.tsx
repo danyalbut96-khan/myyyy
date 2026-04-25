@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Pill, Loader2 } from 'lucide-react';
+import { MessageSquare, X, Send, Pill } from 'lucide-react';
 import { chatWithBot } from '../services/api';
 import type { ChatMessage } from '../types';
 import { useNavigate } from 'react-router-dom';
@@ -59,7 +59,7 @@ export const ChatBot = () => {
     }
   };
 
-  const handleSearchClick = (query: string) => {
+  const handleSearchClick = (_query: string) => {
     setIsOpen(false);
     navigate(`/result?q=${encodeURIComponent(query)}`);
   };

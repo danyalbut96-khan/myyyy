@@ -3,8 +3,8 @@ import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { fetchMedicineDetails, checkInteraction } from '../services/api';
 import type { MedicineDetails, InteractionResult } from '../types';
 import { 
-  Check, ArrowLeft, Share, BookmarkPlus, Printer, Info, FlaskConical, Activity, Pill, 
-  AlertTriangle, ShieldAlert, Network, Package, Baby, MapPin, Scale, Pill as PillIcon, FileQuestion, Map
+  Check, ArrowLeft, Printer, Info, FlaskConical, Activity, Pill, 
+  AlertTriangle, ShieldAlert, Network, Package, Baby, MapPin, Scale, Pill as PillIcon, Map
 } from 'lucide-react';
 
 const LoadingScreen = ({ query, isUrdu }: { query: string, isUrdu: boolean }) => {

@@ -5,7 +5,7 @@ export const Pharmacies = () => {
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
   const [pharmacies, setPharmacies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Note: To implement actual Google Maps Places API:
