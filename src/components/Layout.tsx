@@ -113,7 +113,7 @@ const Footer = () => {
           </div>
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} MediFinder AI. All rights reserved.</p>
-            <p>Made by RedHeart with CloudXify</p>
+            <p>Made with <span style={{ color: '#ff4d4d' }}>❤️</span> by <a href="https://cloudxify.site" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>CloudXify</a></p>
           </div>
         </div>
       </footer>

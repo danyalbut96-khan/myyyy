@@ -1,66 +1,92 @@
+import { ShieldCheck, Heart, Users, Target, Code, Cpu } from 'lucide-react';
+
 export const About = () => {
+  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
+
+  const developers = [
+    { name: 'Danyal', role: 'Lead Developer', bio: 'Specialist in AI Integration and Full-Stack Systems.' },
+    { name: 'RedHeart', role: 'UI/UX Designer', bio: 'Focused on creating accessible and premium medical interfaces.' },
+    { name: 'CloudXify', role: 'Infrastructure', bio: 'Scaling AI solutions for the modern web.' }
+  ];
+
   return (
     <div className="fade-up">
       {/* Hero Section */}
       <section className="section text-center" style={{ backgroundColor: 'white' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
-            <span className="badge badge-green">About MediFinder AI</span>
+            <span className="badge badge-green">{isUrdu ? 'ہمارے بارے میں' : 'About Us'}</span>
           </div>
-          
-          <h1 style={{ fontSize: 'clamp(36px, 6vw, 64px)', marginBottom: '24px' }}>
-            Bridging Medicine &<br />
-            <i className="text-primary-accent">Technology</i>
+          <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', marginBottom: '24px' }}>
+            {isUrdu ? 'صحت کی معلومات کو بہتر بنانا' : 'Empowering Healthcare Information'}
           </h1>
-          
-          <p className="text-muted mx-auto" style={{ maxWidth: '600px', fontSize: '18px', fontWeight: 300 }}>
-            We leverage advanced artificial intelligence to make complex medical data accessible, understandable, and actionable for everyone.
+          <p className="text-muted mx-auto" style={{ maxWidth: '700px', fontSize: '18px' }}>
+            {isUrdu 
+              ? 'میڈی فائنڈر اے آئی کا مقصد پیچیدہ طبی ڈیٹا اور عام لوگوں کے درمیان فرق کو ختم کرنا ہے۔' 
+              : 'MediFinder AI is dedicated to bridging the gap between complex medical data and everyday users through advanced artificial intelligence.'}
           </p>
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* Mission & Vision */}
       <section className="section container">
-        <div className="prose">
-          <h2>Our Mission</h2>
-          <p>
-            MediFinder AI was created with a singular vision: to democratize medical information. 
-            Navigating pharmaceutical details, understanding chemical compositions, and identifying potential 
-            side effects shouldn't require a medical degree. We aim to bridge the gap between complex medical 
-            jargon and everyday understanding.
-          </p>
-          <p>
-            By synthesizing vast amounts of medical data into clear, actionable insights, we empower 
-            individuals to make informed decisions about their health while providing a valuable reference 
-            tool for healthcare professionals.
-          </p>
-
-          <h2>How It Works</h2>
-          <p>
-            When you search for a medication, MediFinder AI utilizes state-of-the-art Large Language Models, 
-            specifically <strong>Claude AI</strong>, to instantly query, analyze, and structure pharmaceutical data.
-          </p>
-          <p>
-            The system cross-references active ingredients, dosages, and interactions to generate a comprehensive 
-            profile of the requested medicine. It even identifies comparable therapeutic alternatives to help users 
-            understand generic vs. brand-name options available in the market.
-          </p>
-
-          <h2>Technology Stack</h2>
-          <div className="flex gap-4" style={{ marginTop: '24px', flexWrap: 'wrap' }}>
-            <span className="badge" style={{ backgroundColor: '#000', color: '#fff' }}>Next.js / React</span>
-            <span className="badge" style={{ backgroundColor: '#D97757', color: '#fff' }}>Claude AI</span>
-            <span className="badge" style={{ backgroundColor: '#000', color: '#fff' }}>Vercel</span>
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="icon-box"><Target size={24} /></div>
+            <h3>{isUrdu ? 'ہمارا مشن' : 'Our Mission'}</h3>
+            <p>{isUrdu 
+              ? 'ہر ایک کو قابل اعتماد اور آسانی سے سمجھنے والی طبی معلومات تک رسائی فراہم کرنا۔' 
+              : 'To provide everyone with access to reliable, easy-to-understand medical information at their fingertips.'}</p>
           </div>
-
-          <div className="disclaimer-box">
-            <h3><span style={{ fontSize: '20px' }}>⚠️</span> Disclaimer</h3>
-            <p>
-              MediFinder AI is an informational tool and is not a substitute for professional medical advice, 
-              diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider 
-              with any questions you may have regarding a medical condition or medication.
-            </p>
+          <div className="feature-card">
+            <div className="icon-box"><Heart size={24} /></div>
+            <h3>{isUrdu ? 'ہمارا وژن' : 'Our Vision'}</h3>
+            <p>{isUrdu 
+              ? 'ایک ایسی دنیا جہاں ٹیکنالوجی صحت کے بہتر فیصلوں میں مددگار ثابت ہو۔' 
+              : 'A world where technology empowers better health decisions and improved patient outcomes globally.'}</p>
           </div>
+          <div className="feature-card">
+            <div className="icon-box"><ShieldCheck size={24} /></div>
+            <h3>{isUrdu ? 'ہمارے اصول' : 'Our Values'}</h3>
+            <p>{isUrdu 
+              ? 'درستگی، رازداری، اور صارف کی آسانی ہماری اولین ترجیحات ہیں۔' 
+              : 'Accuracy, privacy, and user accessibility are the core pillars of everything we build.'}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="section" style={{ backgroundColor: 'var(--accent-light)' }}>
+        <div className="container text-center">
+          <h2 style={{ marginBottom: 40 }}>{isUrdu ? 'ہماری ٹیکنالوجی' : 'Our Technology Stack'}</h2>
+          <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex items-center gap-2 text-primary-accent" style={{ fontWeight: 600 }}>
+              <Code size={20} /> Next.js & React
+            </div>
+            <div className="flex items-center gap-2 text-primary-accent" style={{ fontWeight: 600 }}>
+              <Cpu size={20} /> Claude AI (OpenRouter)
+            </div>
+            <div className="flex items-center gap-2 text-primary-accent" style={{ fontWeight: 600 }}>
+              <Heart size={20} /> CloudXify Infrastructure
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Developers Section */}
+      <section className="section container">
+        <div className="text-center mb-12">
+          <h2 style={{ fontSize: 32 }}>{isUrdu ? 'ہماری ٹیم' : 'Meet the Developers'}</h2>
+        </div>
+        <div className="features-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          {developers.map((dev, i) => (
+            <div key={i} className="info-card text-center" style={{ padding: 40 }}>
+              <div className="icon-box mx-auto mb-6"><Users size={32} /></div>
+              <h3 style={{ fontSize: 24, marginBottom: 8 }}>{dev.name}</h3>
+              <div className="badge badge-blue mb-4">{dev.role}</div>
+              <p className="text-muted" style={{ fontSize: 14 }}>{dev.bio}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

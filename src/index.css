@@ -180,6 +180,8 @@ button {
 .nav-pill:hover {
   background-color: var(--accent-light);
   color: var(--accent-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(27, 94, 59, 0.1);
 }
 
 /* Badges & Tags */
