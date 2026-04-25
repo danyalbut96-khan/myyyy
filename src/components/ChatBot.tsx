@@ -13,6 +13,7 @@ export const ChatBot = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
   const [hasGreeted, setHasGreeted] = useState(false);
 
