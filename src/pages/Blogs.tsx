@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Clock, User, ArrowRight, Search as SearchIcon } from 'lucide-react';
+import { Clock, User, ArrowRight, Search as SearchIcon } from 'lucide-react';
 import { fetchBlogs, type Blog } from '../services/api';
 
 export const Blogs = () => {
