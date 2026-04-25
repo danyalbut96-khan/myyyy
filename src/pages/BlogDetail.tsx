@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, User, Calendar, Share2, Facebook, Twitter, Link as LinkIcon, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Share2, Globe, Send, Link as LinkIcon, MessageSquare } from 'lucide-react';
 import { MOCK_BLOGS, type Blog } from '../services/api';
 
 export const BlogDetail = () => {
@@ -37,7 +37,7 @@ export const BlogDetail = () => {
           
           <div className="flex flex-wrap items-center gap-6 text-muted">
             <div className="flex items-center gap-2">
-              <div style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyCenter: 'center', fontWeight: 700 }}>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
                 {blog.author[0]}
               </div>
               <div>
@@ -85,8 +85,8 @@ export const BlogDetail = () => {
                 <p className="text-muted text-sm">{isUrdu ? 'صحت کے بارے میں شعور پھیلانے میں ہماری مدد کریں۔' : 'Help us spread awareness about health and wellness.'}</p>
               </div>
               <div className="flex gap-3">
-                <button className="btn-secondary" style={{ padding: '12px' }}><Facebook size={20} /></button>
-                <button className="btn-secondary" style={{ padding: '12px' }}><Twitter size={20} /></button>
+                <button className="btn-secondary" style={{ padding: '12px' }}><Globe size={20} /></button>
+                <button className="btn-secondary" style={{ padding: '12px' }}><Send size={20} /></button>
                 <button className="btn-secondary" style={{ padding: '12px' }}><Share2 size={20} /></button>
                 <button className="btn-secondary" style={{ padding: '12px' }}><LinkIcon size={20} /></button>
               </div>

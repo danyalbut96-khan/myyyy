@@ -5,10 +5,10 @@ export const About = () => {
 
   const developers = [
     {
-      name: 'CloudXify',
+      name: 'shahyan abbas',
       role: 'Core Infrastructure',
       bio: 'Scaling AI solutions and modern web experiences. Specializing in high-performance cloud architectures and intelligent digital automation.',
-      link: 'https://cloudexify.site'
+      link: 'https://www.linkedin.com/in/shahyan-abbas-01b445404?utm_source=share_via&utm_content=profile&utm_medium=member_android'
     },
     {
       name: 'Mustafa Hussain',
@@ -17,10 +17,10 @@ export const About = () => {
       link: 'https://mustafa-hussain-portfolio.vercel.app/'
     },
     {
-      name: 'M. Majid Khan',
+      name: 'CloudExify',
       role: 'Team Lead',
       bio: 'BSc Software Engineering student focused on modern software architectures, leadership, and high-impact digital products.',
-      link: '#'
+      link: 'https://cloudexify.site'
     }
   ];
 

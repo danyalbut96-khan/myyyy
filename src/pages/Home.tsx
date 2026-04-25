@@ -318,8 +318,5 @@ export const Home = () => {
         </section>
       )}
     </div>
-        </section>
-      )}
-    </div>
   );
 };
