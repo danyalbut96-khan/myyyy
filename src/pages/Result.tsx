@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, Circle, AlertTriangle, AlertCircle, Info, Pill, BookOpen, Activity, Beaker } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, AlertTriangle, AlertCircle, Pill, BookOpen, Activity, Beaker } from 'lucide-react';
 import { fetchMedicineDetails } from '../services/api';
-import { MedicineDetails } from '../types';
+import type { MedicineDetails } from '../types';
 
 const LoadingScreen = () => {
   const [step, setStep] = useState(0);

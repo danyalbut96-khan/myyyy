@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Search, Settings, Info, Shield, FileText, Menu, X } from 'lucide-react';
+import { Search, Settings, Info, Menu, X } from 'lucide-react';
 
 const DisclaimerBanner = ({ isFooter = false }) => (
   <div className={`disclaimer-banner ${isFooter ? 'disclaimer-footer' : ''}`}>
