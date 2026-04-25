@@ -1,35 +1,108 @@
-import { useState, useEffect } from 'react';
-import { MapPin, Navigation, Star } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { MapPin, Navigation, Star, Loader2 } from 'lucide-react';
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 
 export const Pharmacies = () => {
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
   const [pharmacies, setPharmacies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [map, setMap] = useState<any>(null);
 
   useEffect(() => {
-    // Note: To implement actual Google Maps Places API:
-    // 1. Add <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script> to index.html
-    // 2. Use navigator.geolocation.getCurrentPosition
-    // 3. Use new google.maps.places.PlacesService(map).nearbySearch
-    // 
-    // For now, since the user asked to put a placeholder for the API key,
-    // I am simulating a response to demonstrate the UI.
-    
-    const simulateFetch = () => {
-      setLoading(true);
-      setTimeout(() => {
-        setPharmacies([
-          { id: 1, name: 'Fazal Din Pharma Plus', address: 'Main Boulevard, Lahore', distance: '0.8 km', rating: 4.5, open: true },
-          { id: 2, name: 'Servaid Pharmacy', address: 'DHA Phase 5, Lahore', distance: '1.2 km', rating: 4.2, open: true },
-          { id: 3, name: 'Clinix Pharmacy', address: 'Model Town, Lahore', distance: '2.5 km', rating: 4.0, open: false },
-        ]);
-        setLoading(false);
-      }, 1000);
+    if (window.google && mapRef.current && !map) {
+      const initialMap = new window.google.maps.Map(mapRef.current, {
+        center: { lat: 31.5204, lng: 74.3587 }, // Default Lahore
+        zoom: 14,
+        styles: [
+          {
+            "featureType": "poi.medical",
+            "elementType": "geometry",
+            "stylers": [{ "color": "#f1f8e9" }]
+          }
+        ]
+      });
+      setMap(initialMap);
+      getUserLocation(initialMap);
+    }
+  }, [mapRef, map]);
+
+  const getUserLocation = (currentMap: any) => {
+    setLoading(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          currentMap.setCenter(pos);
+          searchPharmacies(pos, currentMap);
+        },
+        () => {
+          setError(isUrdu ? "مقام تک رسائی ناکام رہی۔" : "Error: The Geolocation service failed.");
+          setLoading(false);
+        }
+      );
+    } else {
+      setError(isUrdu ? "آپ کا براؤزر مقام کی معلومات کو سپورٹ نہیں کرتا۔" : "Error: Your browser doesn't support geolocation.");
+      setLoading(false);
+    }
+  };
+
+  const searchPharmacies = (location: { lat: number, lng: number }, currentMap: any) => {
+    const service = new window.google.maps.places.PlacesService(currentMap);
+    const request = {
+      location: location,
+      radius: '5000',
+      type: ['pharmacy']
     };
 
-    simulateFetch();
-  }, []);
+    service.nearbySearch(request, (results: any, status: any) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        const processedResults = results.map((place: any) => ({
+          id: place.place_id,
+          name: place.name,
+          address: place.vicinity,
+          rating: place.rating || 0,
+          open: place.opening_hours?.isOpen() || false,
+          location: place.geometry.location,
+          distance: calculateDistance(location.lat, location.lng, place.geometry.location.lat(), place.geometry.location.lng())
+        }));
+        setPharmacies(processedResults);
+        
+        // Add markers
+        processedResults.forEach((place: any) => {
+          new window.google.maps.Marker({
+            position: place.location,
+            map: currentMap,
+            title: place.name,
+            icon: {
+              url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            }
+          });
+        });
+      }
+      setLoading(false);
+    });
+  };
+
+  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const R = 6371; // km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return (R * c).toFixed(1) + ' km';
+  };
 
   return (
     <div className="fade-up" style={{ display: 'flex', height: 'calc(100vh - 104px)' }}>
@@ -38,17 +111,30 @@ export const Pharmacies = () => {
         <div style={{ padding: 20, borderBottom: '1px solid var(--border)' }}>
           <h2 style={{ fontSize: 24, marginBottom: 16 }}>{isUrdu ? 'قریبی فارمیسی' : 'Nearby Pharmacies'}</h2>
           <div className="flex gap-2">
-            <span className="badge badge-green">Open Now</span>
-            <span className="badge" style={{ backgroundColor: '#eee' }}>Rated 4+</span>
+            <span className="badge badge-green">{isUrdu ? 'کھلی ہیں' : 'Open Now'}</span>
+            <button 
+              onClick={() => map && getUserLocation(map)}
+              className="badge" 
+              style={{ backgroundColor: '#eee', border: 'none' }}
+            >
+              {isUrdu ? 'موجودہ مقام استعمال کریں' : 'Use Current Location'}
+            </button>
           </div>
         </div>
         
         <div style={{ flex: 1, overflowY: 'auto', padding: 20 }}>
           {loading ? (
-            <div className="text-center text-muted" style={{ marginTop: 40 }}>{isUrdu ? 'تلاش ہو رہا ہے...' : 'Searching...'}</div>
+            <div className="text-center text-muted" style={{ marginTop: 40 }}>
+              <Loader2 className="mx-auto mb-4 animate-spin" size={32} />
+              {isUrdu ? 'تلاش ہو رہا ہے...' : 'Searching nearby...'}
+            </div>
+          ) : error ? (
+            <div className="text-center text-muted" style={{ marginTop: 40 }}>{error}</div>
+          ) : pharmacies.length === 0 ? (
+            <div className="text-center text-muted" style={{ marginTop: 40 }}>{isUrdu ? 'کوئی فارمیسی نہیں ملی۔' : 'No pharmacies found nearby.'}</div>
           ) : (
             pharmacies.map(p => (
-              <div key={p.id} className="pharmacy-card">
+              <div key={p.id} className="pharmacy-card" onClick={() => map.setCenter(p.location)}>
                 <h3 style={{ fontSize: 18, marginBottom: 8 }}>{p.name}</h3>
                 <p className="text-muted" style={{ fontSize: 14, marginBottom: 8 }}>{p.address}</p>
                 <div className="flex items-center justify-between mb-4">
@@ -63,9 +149,15 @@ export const Pharmacies = () => {
                   <span className={`badge ${p.open ? 'badge-green' : 'badge-amber'}`}>
                     {p.open ? (isUrdu ? 'کھلی ہے' : 'Open Now') : (isUrdu ? 'بند ہے' : 'Closed')}
                   </span>
-                  <button className="btn-secondary" style={{ padding: '6px 12px', fontSize: 12 }}>
+                  <a 
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${p.location.lat()},${p.location.lng()}`} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="btn-secondary" 
+                    style={{ padding: '6px 12px', fontSize: 12 }}
+                  >
                     <Navigation size={14} /> {isUrdu ? 'راستہ' : 'Directions'}
-                  </button>
+                  </a>
                 </div>
               </div>
             ))
@@ -73,13 +165,14 @@ export const Pharmacies = () => {
         </div>
       </div>
 
-      {/* Right Panel (Map Placeholder) */}
-      <div style={{ flex: 1, backgroundColor: '#e5e7eb', position: 'relative' }}>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', color: '#6b7280' }}>
-          <MapPin size={48} style={{ marginBottom: 16 }} />
-          <p>Google Maps Integration Placeholder</p>
-          <p style={{ fontSize: 14 }}>Add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to your environment</p>
-        </div>
+      {/* Right Panel (Map) */}
+      <div ref={mapRef} style={{ flex: 1, backgroundColor: '#e5e7eb' }}>
+        {!window.google && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexDirection: 'column' }}>
+            <Loader2 className="animate-spin mb-4" size={48} />
+            <p>Loading Google Maps...</p>
+          </div>
+        )}
       </div>
     </div>
   );
