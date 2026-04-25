@@ -67,9 +67,79 @@ export const Chat = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  const HEALTH_KEYWORDS = [
+    'health', 'medicine', 'pill', 'symptom', 'doctor', 'pharmacy', 'prescription', 'pain', 'fever', 'illness', 
+    'disease', 'treatment', 'cure', 'medical', 'hospital', 'blood', 'care', 'heart', 'brain', 'lung', 'liver', 
+    'kidney', 'stomach', 'skin', 'eye', 'ear', 'nose', 'throat', 'bone', 'muscle', 'nerve', 'allergy', 'infection', 
+    'virus', 'bacteria', 'covid', 'cancer', 'diabetes', 'blood pressure', 'hypertension', 'cholesterol', 'weight', 
+    'diet', 'nutrition', 'exercise', 'sleep', 'mental', 'stress', 'anxiety', 'depression', 'therapy', 'surgery', 
+    'vaccine', 'dose', 'tablet', 'capsule', 'syrup', 'ointment', 'cream', 'gel', 'injection', 'serum', 'drops', 
+    'inhaler', 'patch', 'brand', 'generic', 'formula', 'chemical', 'salt', 'active', 'side effect', 'contraindication', 
+    'interaction', 'availability', 'price', 'manufacturer', 'hi', 'hello', 'hey', 'help', 'who', 'what', 'how'
+  ];
+
+  const URDU_KEYWORDS = [
+    'صحت', 'دوا', 'گولی', 'علامت', 'ڈاکٹر', 'فارمیسی', 'نسخہ', 'درد', 'بخار', 'بیماری', 'علاج', 'طبی', 'ہسپتال', 
+    'خون', 'دل', 'دماغ', 'پھیپھڑے', 'جگر', 'گردہ', 'معدہ', 'جلد', 'آنکھ', 'کان', 'ناک', 'گلا', 'ہڈی', 'پٹھا', 
+    'اعصاب', 'ایلرجی', 'انفیکشن', 'وائرس', 'بیکٹیریا', 'کینسر', 'ذیابیطس', 'شوگر', 'بلڈ پریشر', 'کولیسٹرول', 
+    'وزن', 'غذا', 'ورزش', 'نیند', 'ذہنی', 'تناؤ', 'پریشانی', 'ڈپریشن', 'سرجری', 'ویکسین', 'خوراک', 'شربت', 
+    'مرہم', 'انجیکشن', 'قطرے', 'متبادل', 'قیمت', 'سلام', 'ہیلو', 'کیسے', 'کون', 'کیا'
+  ];
+
+  const checkHealthQuery = (text: string) => {
+    const lowerText = text.toLowerCase();
+    const isEnglishHealth = HEALTH_KEYWORDS.some(k => lowerText.includes(k));
+    const isUrduHealth = URDU_KEYWORDS.some(k => lowerText.includes(k));
+    return isEnglishHealth || isUrduHealth;
+  };
+
   const handleSend = async (textOverride?: string) => {
     const text = textOverride || input;
     if (!text.trim() && !selectedImage) return;
+
+    // Guardrail Check
+    if (text.trim() && !checkHealthQuery(text)) {
+      const refusal: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: isUrdu 
+          ? 'میں معذرت خواہ ہوں، لیکن مجھے صحت اور ادویات کے علاوہ دیگر موضوعات پر بات کرنے کی سختی سے ممانعت ہے۔ میں صرف صحت سے متعلق سوالات میں آپ کی مدد کر سکتا ہوں۔'
+          : 'I am strictly prohibited from answering non-health related queries. I can only assist you with health and medicine-related questions.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      
+      let updatedSessions = [...sessions];
+      let currentSessionId = activeSessionId;
+      
+      const userMsg: ChatMessage = {
+        id: (Date.now() - 1).toString(),
+        role: 'user',
+        content: text.trim(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      if (!currentSessionId) {
+        currentSessionId = Date.now().toString();
+        const newSession: ChatSession = {
+          id: currentSessionId,
+          title: text.trim().substring(0, 30) + '...',
+          messages: [userMsg, refusal],
+          updatedAt: new Date().toISOString()
+        };
+        updatedSessions = [newSession, ...updatedSessions];
+      } else {
+        updatedSessions = updatedSessions.map(s => {
+          if (s.id === currentSessionId) {
+            return { ...s, messages: [...s.messages, userMsg, refusal], updatedAt: new Date().toISOString() };
+          }
+          return s;
+        });
+      }
+      saveSessions(updatedSessions);
+      setActiveSessionId(currentSessionId);
+      setInput('');
+      return;
+    }
 
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -84,10 +154,20 @@ export const Chat = () => {
 
     if (!currentSessionId) {
       currentSessionId = Date.now().toString();
+      // Add greeting for new sessions
+      const greeting: ChatMessage = {
+        id: 'greeting',
+        role: 'assistant',
+        content: isUrdu 
+          ? 'ہیلو! میں میڈی فائنڈر اے آئی اسسٹنٹ ہوں۔ میں آپ کی صحت کے بارے میں کیا مدد کر سکتا ہوں؟ آپ اپنا نسخہ اپ لوڈ کر سکتے ہیں یا مجھ سے صحت سے متعلق کوئی بھی سوال پوچھ سکتے ہیں۔'
+          : 'Hi! I am the MediFinder AI Assistant. How can I help you with your health today? You can upload your prescription or ask me any health-related questions.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      
       const newSession: ChatSession = {
         id: currentSessionId,
         title: text.trim() ? (text.trim().substring(0, 30) + '...') : (isUrdu ? 'تصویری تجزیہ...' : 'Image Analysis...'),
-        messages: [newMessage],
+        messages: [greeting, newMessage],
         updatedAt: new Date().toISOString()
       };
       updatedSessions = [newSession, ...updatedSessions];

@@ -14,7 +14,48 @@ export const ChatBot = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
+  const [hasGreeted, setHasGreeted] = useState(false);
+
+  const HEALTH_KEYWORDS = [
+    'health', 'medicine', 'pill', 'symptom', 'doctor', 'pharmacy', 'prescription', 'pain', 'fever', 'illness', 
+    'disease', 'treatment', 'cure', 'medical', 'hospital', 'blood', 'care', 'heart', 'brain', 'lung', 'liver', 
+    'kidney', 'stomach', 'skin', 'eye', 'ear', 'nose', 'throat', 'bone', 'muscle', 'nerve', 'allergy', 'infection', 
+    'virus', 'bacteria', 'covid', 'cancer', 'diabetes', 'blood pressure', 'hypertension', 'cholesterol', 'weight', 
+    'diet', 'nutrition', 'exercise', 'sleep', 'mental', 'stress', 'anxiety', 'depression', 'therapy', 'surgery', 
+    'vaccine', 'dose', 'tablet', 'capsule', 'syrup', 'ointment', 'cream', 'gel', 'injection', 'serum', 'drops', 
+    'inhaler', 'patch', 'brand', 'generic', 'formula', 'chemical', 'salt', 'active', 'side effect', 'contraindication', 
+    'interaction', 'availability', 'price', 'manufacturer', 'hi', 'hello', 'hey', 'help', 'who', 'what', 'how'
+  ];
+
+  const URDU_KEYWORDS = [
+    'صحت', 'دوا', 'گولی', 'علامت', 'ڈاکٹر', 'فارمیسی', 'نسخہ', 'درد', 'بخار', 'بیماری', 'علاج', 'طبی', 'ہسپتال', 
+    'خون', 'دل', 'دماغ', 'پھیپھڑے', 'جگر', 'گردہ', 'معدہ', 'جلد', 'آنکھ', 'کان', 'ناک', 'گلا', 'ہڈی', 'پٹھا', 
+    'اعصاب', 'ایلرجی', 'انفیکشن', 'وائرس', 'بیکٹیریا', 'کینسر', 'ذیابیطس', 'شوگر', 'بلڈ پریشر', 'کولیسٹرول', 
+    'وزن', 'غذا', 'ورزش', 'نیند', 'ذہنی', 'تناؤ', 'پریشانی', 'ڈپریشن', 'سرجری', 'ویکسین', 'خوراک', 'شربت', 
+    'مرہم', 'انجیکشن', 'قطرے', 'متبادل', 'قیمت', 'سلام', 'ہیلو', 'کیسے', 'کون', 'کیا'
+  ];
+
+  const checkHealthQuery = (text: string) => {
+    const lowerText = text.toLowerCase();
+    const isEnglishHealth = HEALTH_KEYWORDS.some(k => lowerText.includes(k));
+    const isUrduHealth = URDU_KEYWORDS.some(k => lowerText.includes(k));
+    return isEnglishHealth || isUrduHealth;
+  };
+
+  useEffect(() => {
+    if (isOpen && !hasGreeted) {
+      const greeting: ChatMessage = {
+        id: 'greeting',
+        role: 'assistant',
+        content: isUrdu 
+          ? 'ہیلو! میں میڈی فائنڈر اے آئی اسسٹنٹ ہوں۔ میں آپ کی صحت کے بارے میں کیا مدد کر سکتا ہوں؟ آپ اپنا نسخہ اپ لوڈ کر سکتے ہیں یا مجھ سے صحت سے متعلق کوئی بھی سوال پوچھ سکتے ہیں۔'
+          : 'Hi! I am the MediFinder AI Assistant. How can I help you with your health today? You can upload your prescription or ask me any health-related questions.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages([greeting]);
+      setHasGreeted(true);
+    }
+  }, [isOpen, hasGreeted, isUrdu]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -42,6 +83,26 @@ export const ChatBot = () => {
 
   const handleSend = async () => {
     if (!input.trim() && !selectedImage) return;
+
+    // Guardrail Check
+    if (input.trim() && !checkHealthQuery(input)) {
+      const refusal: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: isUrdu 
+          ? 'میں معذرت خواہ ہوں، لیکن مجھے صحت اور ادویات کے علاوہ دیگر موضوعات پر بات کرنے کی سختی سے ممانعت ہے۔ میں صرف صحت سے متعلق سوالات میں آپ کی مدد کر سکتا ہوں۔'
+          : 'I am strictly prohibited from answering non-health related queries. I can only assist you with health and medicine-related questions.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, {
+        id: (Date.now() - 1).toString(),
+        role: 'user',
+        content: input.trim(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }, refusal]);
+      setInput('');
+      return;
+    }
 
     const newMessage: ChatMessage = {
       id: Date.now().toString(),

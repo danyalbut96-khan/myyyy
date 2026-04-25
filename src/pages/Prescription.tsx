@@ -46,7 +46,7 @@ export const Prescription = () => {
 
   return (
     <div className="fade-up">
-      <section className="section text-center" style={{ backgroundColor: 'white' }}>
+      <section className="section text-center" style={{ backgroundColor: 'var(--bg-color)' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-green">{isUrdu ? 'اے آئی ریڈر' : 'AI Reader'}</span>
@@ -175,9 +175,9 @@ export const Prescription = () => {
             )}
 
             {result.warnings && (
-              <div className="disclaimer-box" style={{ marginTop: 0, padding: 20, backgroundColor: '#fee2e2', borderColor: '#f87171' }}>
-                <h4 style={{ marginBottom: 8, color: '#dc2626' }}>Warnings</h4>
-                <p style={{ color: '#dc2626' }}>{result.warnings}</p>
+              <div className="disclaimer-box" style={{ marginTop: 0, padding: 20, backgroundColor: 'var(--surface-alt)', borderColor: 'var(--warning-text)' }}>
+                <h4 style={{ marginBottom: 8, color: 'var(--warning-text)' }}>Warnings</h4>
+                <p style={{ color: 'var(--text-main)' }}>{result.warnings}</p>
               </div>
             )}
 

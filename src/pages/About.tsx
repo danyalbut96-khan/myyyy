@@ -27,7 +27,7 @@ export const About = () => {
   return (
     <div className="fade-up">
       {/* Hero Section */}
-      <section className="section text-center" style={{ backgroundColor: 'white' }}>
+      <section className="section text-center" style={{ backgroundColor: 'var(--bg-color)' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-green">{isUrdu ? 'ہمارے بارے میں' : 'About Us'}</span>
@@ -99,7 +99,7 @@ export const About = () => {
       </section>
 
       {/* Tech Stack */}
-      <section className="section" style={{ backgroundColor: 'var(--accent-light)' }}>
+      <section className="section" style={{ backgroundColor: 'var(--surface-alt)' }}>
         <div className="container text-center">
           <h2 style={{ marginBottom: 40 }}>{isUrdu ? 'ہماری ٹیکنالوجی' : 'Our Technology Stack'}</h2>
           <div className="flex flex-wrap justify-center gap-8">

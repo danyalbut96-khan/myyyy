@@ -126,10 +126,10 @@ export const Result = () => {
   if (error) {
     return (
       <div className="container section fade-up text-center">
-        <div style={{ backgroundColor: '#fef2f2', padding: '40px', borderRadius: '20px', maxWidth: '600px', margin: '0 auto' }}>
-          <AlertTriangle size={48} color="#dc2626" style={{ margin: '0 auto 16px auto' }} />
-          <h2 style={{ color: '#991b1b', marginBottom: '16px' }}>{isUrdu ? 'تجزیہ ناکام ہو گیا' : 'Analysis Failed'}</h2>
-          <p style={{ color: '#b91c1c', marginBottom: '24px' }}>{error}</p>
+        <div style={{ backgroundColor: 'var(--surface-alt)', padding: '40px', borderRadius: '20px', maxWidth: '600px', margin: '0 auto', border: '1px solid var(--border)' }}>
+          <AlertTriangle size={48} color="var(--warning-text)" style={{ margin: '0 auto 16px auto' }} />
+          <h2 style={{ color: 'var(--text-main)', marginBottom: '16px' }}>{isUrdu ? 'تجزیہ ناکام ہو گیا' : 'Analysis Failed'}</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{error}</p>
           <button onClick={() => navigate('/')} className="btn-primary">
             <ArrowLeft size={18} /> {isUrdu ? 'ہوم پر واپس جائیں' : 'Return Home'}
           </button>
@@ -192,7 +192,7 @@ export const Result = () => {
 
           {/* Availability & Forms */}
           {data.availability && (
-            <div className="info-card info-card-full stagger-1" style={{ backgroundColor: '#fdfbfa' }}>
+            <div className="info-card info-card-full stagger-1" style={{ backgroundColor: 'var(--surface-alt)' }}>
               <div className="info-header">
                 <div className="icon-sm"><Package size={18} /></div>
                 <h3>{isUrdu ? 'دستیابی اور شکلیں' : 'Availability & Forms'}</h3>
@@ -202,9 +202,9 @@ export const Result = () => {
                   {['Tablet', 'Capsule', 'Syrup', 'Injection/Serum', 'Cream/Ointment', 'Drops', 'Inhaler', 'Patch'].map(f => {
                     const isAvail = data.availability?.forms.some(av => av.toLowerCase().includes(f.toLowerCase()));
                     return (
-                      <div key={f} style={{ opacity: isAvail ? 1 : 0.4, border: `1px solid ${isAvail ? 'var(--accent-primary)' : 'var(--border)'}`, padding: '8px 16px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8, backgroundColor: isAvail ? 'white' : 'transparent' }}>
+                      <div key={f} style={{ opacity: isAvail ? 1 : 0.4, border: `1px solid ${isAvail ? 'var(--accent-primary)' : 'var(--border)'}`, padding: '8px 16px', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 8, backgroundColor: isAvail ? 'var(--surface)' : 'transparent' }}>
                         <PillIcon size={16} color={isAvail ? 'var(--accent-primary)' : 'gray'} />
-                        <span style={{ fontSize: 14, fontWeight: isAvail ? 600 : 400 }}>{f}</span>
+                        <span style={{ fontSize: 14, fontWeight: isAvail ? 600 : 400, color: 'var(--text-main)' }}>{f}</span>
                       </div>
                     );
                   })}
@@ -287,7 +287,7 @@ export const Result = () => {
 
           {/* Generic vs Brand Comp */}
           {data.genericVsBrand && (
-            <div className="info-card info-card-full stagger-4" style={{ backgroundColor: '#fff', borderColor: 'var(--accent-light)' }}>
+            <div className="info-card info-card-full stagger-4" style={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)' }}>
               <div className="info-header">
                 <div className="icon-sm"><Scale size={18} /></div>
                 <h3>{isUrdu ? 'جینرک بمقابلہ برانڈ موازنہ' : 'Generic vs Brand Comparison'}</h3>
@@ -369,10 +369,10 @@ export const Result = () => {
           </div>
 
           {/* Find Pharmacies Inline Card */}
-          <div className="info-card info-card-full stagger-4" style={{ backgroundColor: '#F0F9FF', borderColor: '#BDE4FF' }}>
-            <div className="info-header" style={{ borderColor: '#BDE4FF' }}>
-              <div className="icon-sm" style={{ backgroundColor: 'white' }}><MapPin size={18} color="#0066CC" /></div>
-              <h3 style={{ color: '#0044CC' }}>{isUrdu ? 'قریبی فارمیسی تلاش کریں' : 'Find Nearby Pharmacies'}</h3>
+          <div className="info-card info-card-full stagger-4" style={{ backgroundColor: 'var(--surface-alt)', borderColor: 'var(--border)' }}>
+            <div className="info-header" style={{ borderColor: 'var(--border)' }}>
+              <div className="icon-sm" style={{ backgroundColor: 'var(--surface)' }}><MapPin size={18} color="var(--accent-primary)" /></div>
+              <h3 style={{ color: 'var(--accent-primary)' }}>{isUrdu ? 'قریبی فارمیسی تلاش کریں' : 'Find Nearby Pharmacies'}</h3>
             </div>
             <div className="info-content flex flex-col sm:flex-row justify-between items-center gap-4">
               <p style={{ color: '#0055CC' }}>
