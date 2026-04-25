@@ -1,6 +1,6 @@
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, BookOpen, Clock, User } from 'lucide-react';
+import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, BookOpen, Clock, Camera } from 'lucide-react';
 import { fetchBlogs, type Blog } from '../services/api';
 
 const COMMON_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen', 'Lisinopril', 'Metformin', 'Aspirin'];
@@ -13,28 +13,13 @@ export const Home = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
   const words = isUrdu 
     ? ['ادویات', 'خوراک', 'متبادل', 'اثرات', 'قیمت'] 
     : ['Medicine', 'Dosage', 'Side Effects', 'Alternatives', 'Prices'];
-
-  useEffect(() => {
-    const loadBlogs = async () => {
-      try {
-        const blogData = await fetchBlogs();
-        setBlogs(blogData);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoadingBlogs(false);
-      }
-    };
-    loadBlogs();
-  }, []);
-
-  // ... (existing text animation effect remains same)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -56,6 +41,20 @@ export const Home = () => {
 
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, textIndex, words]);
+
+  useEffect(() => {
+    const loadBlogs = async () => {
+      try {
+        const blogData = await fetchBlogs();
+        setBlogs(blogData);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoadingBlogs(false);
+      }
+    };
+    loadBlogs();
+  }, []);
 
   useEffect(() => {
     const savedHistory = localStorage.getItem('medifinder_history');
@@ -101,10 +100,27 @@ export const Home = () => {
     setHistory([]);
   };
 
+  const handlePrescriptionClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        sessionStorage.setItem('medifinder_temp_image', base64);
+        navigate('/prescription');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="fade-up">
       {/* Hero Section */}
-      <section className="section text-center" style={{ paddingTop: '100px', paddingBottom: '60px' }}>
+      <section className="section text-center" style={{ paddingTop: '100px', paddingBottom: '40px' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-green">
@@ -126,7 +142,7 @@ export const Home = () => {
               : 'Enter any medicine name to get comprehensive, AI-powered details including composition, uses, dosage, side effects, and alternatives.'}
           </p>
 
-          <form onSubmit={handleSearch} className="search-wrapper mb-8">
+          <form onSubmit={handleSearch} className="search-wrapper mb-8" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
             <Search className="search-icon" size={24} />
             <input
               type="text"
@@ -134,13 +150,35 @@ export const Home = () => {
               placeholder={isUrdu ? 'مثلاً پیناڈول، امیکسیلین...' : 'e.g. Paracetamol, Adderall, Lipitor…'}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              style={{ paddingRight: '120px' }}
             />
-            <button type="submit" className="search-submit">
-              <ArrowRight size={20} />
-            </button>
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              style={{ display: 'none' }} 
+              accept="image/*" 
+              onChange={handleFileChange}
+            />
+            <div className="flex items-center gap-2" style={{ position: 'absolute', right: 8 }}>
+              <button 
+                type="button" 
+                onClick={handlePrescriptionClick}
+                className="btn-secondary"
+                style={{ padding: '10px', borderRadius: '12px', color: 'var(--accent-primary)', border: '1px solid var(--border)' }}
+                title={isUrdu ? 'نسخہ اپ لوڈ کریں' : 'Upload Prescription'}
+              >
+                <Camera size={20} />
+              </button>
+              <button type="submit" className="search-submit" style={{ position: 'static', transform: 'none' }}>
+                <ArrowRight size={20} />
+              </button>
+            </div>
           </form>
 
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4 mt-16">
+            <span className="text-muted" style={{ fontSize: '14px' }}>
+              {isUrdu ? 'یا ان عام ادویات میں سے کوئی آزمائیں:' : 'Or try one of these common medicines:'}
+            </span>
             <div className="flex flex-wrap justify-center gap-3 max-w-xl">
               {COMMON_MEDICINES.map((med) => (
                 <button
@@ -157,17 +195,17 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Health Blog Section */}
-      <section className="section bg-light" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+      {/* Health Blog Section (Compact Grid) */}
+      <section className="section bg-light" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '60px 0' }}>
         <div className="container">
-          <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center justify-between mb-8">
             <div>
               <div className="flex items-center gap-2 text-primary-accent font-semibold mb-2">
-                <BookOpen size={20} />
-                <span>{isUrdu ? 'ہمارا ہیلتھ بلاگ' : 'Our Health Blog'}</span>
+                <BookOpen size={18} />
+                <span>{isUrdu ? 'ہمارا ہیلتھ بلاگ' : 'Health Knowledge'}</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(28px, 4vw, 36px)', fontWeight: 800 }}>
-                {isUrdu ? 'صحت کے بارے میں مفید مضامین' : 'Insights for Better Living'}
+              <h2 style={{ fontSize: '28px', fontWeight: 800 }}>
+                {isUrdu ? 'صحت کے مفید مضامین' : 'Insights for Better Living'}
               </h2>
             </div>
             <Link to="/blogs" className="btn-secondary" style={{ padding: '8px 16px', fontSize: '14px' }}>
@@ -176,42 +214,36 @@ export const Home = () => {
           </div>
 
           {loadingBlogs ? (
-            <div className="news-grid">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="news-card" style={{ height: 320 }}>
-                  <div className="news-image-wrapper skeleton-loading"></div>
-                  <div className="news-content">
-                    <div className="skeleton-loading" style={{ height: 20, width: '80%', marginBottom: 12 }}></div>
-                    <div className="skeleton-loading" style={{ height: 40, width: '100%' }}></div>
-                  </div>
-                </div>
+                <div key={i} className="news-card skeleton-loading" style={{ height: 280 }}></div>
               ))}
             </div>
           ) : (
-            <div className="news-grid">
-              {blogs.map((blog) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {blogs.slice(0, 3).map((blog) => (
                 <Link 
                   key={blog.id} 
                   to={`/blog/${blog.id}`}
                   className="news-card group"
+                  style={{ borderRadius: '16px' }}
                 >
-                  <div className="news-image-wrapper">
+                  <div className="news-image-wrapper" style={{ paddingTop: '55%' }}>
                     <img 
                       src={blog.image} 
                       alt={blog.title} 
                       className="news-image"
                     />
-                    <div className="news-category-badge">{blog.category}</div>
+                    <div className="news-category-badge" style={{ fontSize: '9px', padding: '1px 8px' }}>{blog.category}</div>
                   </div>
-                  <div className="news-content">
+                  <div className="news-content" style={{ padding: '12px' }}>
                     <div className="flex items-center gap-3 text-xs text-muted mb-2">
-                      <span className="flex items-center gap-1"><Clock size={12} /> {blog.readTime}</span>
-                      <span className="flex items-center gap-1"><User size={12} /> {blog.author}</span>
+                      <span className="flex items-center gap-1"><Clock size={10} /> {blog.readTime}</span>
                     </div>
-                    <h3 className="news-title group-hover:text-primary-accent transition-colors">
+                    <h3 className="news-title group-hover:text-primary-accent transition-colors" style={{ fontSize: '15px', marginBottom: '4px' }}>
                       {blog.title}
                     </h3>
-                    <p className="news-summary">
+                    <p className="news-summary" style={{ fontSize: '12px', WebkitLineClamp: 2 }}>
                       {blog.summary}
                     </p>
                   </div>
