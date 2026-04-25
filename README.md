@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# MediFinder AI 💊
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MediFinder AI is a professional, high-performance medicine search engine and medical assistant platform. It leverages advanced Artificial Intelligence to provide instant, comprehensive details about medications, including compositions, dosages, side effects, and therapeutic alternatives.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **AI-Powered Search**: Instant retrieval of structured medical data using OpenRouter (Claude AI / GPT-4o).
+- **Drug Interaction & Safety Checker**: Live tool to check potential interactions between two medications with severity levels.
+- **Generic vs Brand Comparison**: Detailed side-by-side analysis of pricing, manufacturers, and bioavailability.
+- **Prescription Scanner**: AI-driven document reader that extracts patient info and medicine lists from uploaded images or PDFs.
+- **Nearby Pharmacy Finder**: Real-time integration with Google Maps and Places API to locate open pharmacies nearby.
+- **AI Medical Chatbot (MediBot)**: A dedicated health assistant for answering wellness and medication-related questions.
+- **Bilingual Support (Urdu/English)**: Full RTL layout support for Urdu speakers with translated UI and AI responses.
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React (Vite), TypeScript, Lucide React (Icons).
+- **Styling**: Vanilla CSS3 (Custom Design System).
+- **AI Integration**: OpenRouter API (Claude 3.5 Sonnet / GPT-4o Mini).
+- **External APIs**: Google Maps JavaScript API, Google Places API.
+- **State Management**: React Hooks & LocalStorage.
 
-## Expanding the ESLint configuration
+## 📦 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone the repository**
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Configure Environment Variables**:
+   Create a `.env` file and add:
+   ```env
+   VITE_OPENROUTER_API_KEY=your_openrouter_key
+   ```
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📜 Disclaimer
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+MediFinder AI is an informational tool and is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a healthcare professional before taking any medication.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+Made by **RedHeart** with **CloudXify**

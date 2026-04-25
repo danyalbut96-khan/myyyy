@@ -163,10 +163,10 @@ button {
 }
 .nav-links {
   display: flex;
-  gap: 16px;
+  gap: 10px;
 }
 .nav-pill {
-  padding: 8px 20px;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
   background-color: var(--bg-color);
   color: var(--text-secondary);

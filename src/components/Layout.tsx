@@ -113,7 +113,7 @@ const Footer = () => {
           </div>
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} MediFinder AI. All rights reserved.</p>
-            <p>Powered by Claude AI</p>
+            <p>Made by RedHeart with CloudXify</p>
           </div>
         </div>
       </footer>
