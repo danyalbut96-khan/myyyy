@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, User, ArrowRight, Search as SearchIcon } from 'lucide-react';
+import { Clock, Search as SearchIcon } from 'lucide-react';
 import { fetchBlogs, type Blog } from '../services/api';
 
 export const Blogs = () => {
@@ -61,8 +61,8 @@ export const Blogs = () => {
       <section className="section container">
         {loading ? (
           <div className="news-grid">
-            {[1, 2, 3, 4, 5, 6].map(i => (
-              <div key={i} className="news-card skeleton-loading" style={{ height: 350 }}></div>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+              <div key={i} className="news-card skeleton-loading" style={{ height: 260 }}></div>
             ))}
           </div>
         ) : (
@@ -74,21 +74,15 @@ export const Blogs = () => {
                   <div className="news-category-badge">{blog.category}</div>
                 </div>
                 <div className="news-content">
-                  <div className="flex items-center gap-3 text-xs text-muted mb-3">
-                    <span className="flex items-center gap-1"><Clock size={12} /> {blog.readTime}</span>
-                    <span className="flex items-center gap-1"><User size={12} /> {blog.author}</span>
+                  <div className="flex items-center gap-3 text-[10px] text-muted mb-2">
+                    <span className="flex items-center gap-1"><Clock size={10} /> {blog.readTime}</span>
                   </div>
-                  <h3 className="news-title group-hover:text-primary-accent transition-colors" style={{ fontSize: '18px' }}>
+                  <h3 className="news-title group-hover:text-primary-accent transition-colors">
                     {blog.title}
                   </h3>
-                  <p className="news-summary" style={{ fontSize: '14px', WebkitLineClamp: 3 }}>
+                  <p className="news-summary">
                     {blog.summary}
                   </p>
-                  <div className="news-footer mt-4">
-                    <span className="flex items-center gap-1">
-                      {isUrdu ? 'پورا پڑھیں' : 'Read Full Article'} <ArrowRight size={14} />
-                    </span>
-                  </div>
                 </div>
               </Link>
             ))}

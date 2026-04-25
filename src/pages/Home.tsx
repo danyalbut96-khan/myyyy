@@ -214,36 +214,35 @@ export const Home = () => {
           </div>
 
           {loadingBlogs ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="news-card skeleton-loading" style={{ height: 280 }}></div>
+            <div className="news-grid">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="news-card skeleton-loading" style={{ height: 260 }}></div>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {blogs.slice(0, 3).map((blog) => (
+            <div className="news-grid">
+              {blogs.slice(0, 4).map((blog) => (
                 <Link 
                   key={blog.id} 
                   to={`/blog/${blog.id}`}
                   className="news-card group"
-                  style={{ borderRadius: '16px' }}
                 >
-                  <div className="news-image-wrapper" style={{ paddingTop: '55%' }}>
+                  <div className="news-image-wrapper">
                     <img 
                       src={blog.image} 
                       alt={blog.title} 
                       className="news-image"
                     />
-                    <div className="news-category-badge" style={{ fontSize: '9px', padding: '1px 8px' }}>{blog.category}</div>
+                    <div className="news-category-badge">{blog.category}</div>
                   </div>
-                  <div className="news-content" style={{ padding: '12px' }}>
-                    <div className="flex items-center gap-3 text-xs text-muted mb-2">
+                  <div className="news-content">
+                    <div className="flex items-center gap-3 text-[10px] text-muted mb-2">
                       <span className="flex items-center gap-1"><Clock size={10} /> {blog.readTime}</span>
                     </div>
-                    <h3 className="news-title group-hover:text-primary-accent transition-colors" style={{ fontSize: '15px', marginBottom: '4px' }}>
+                    <h3 className="news-title group-hover:text-primary-accent transition-colors">
                       {blog.title}
                     </h3>
-                    <p className="news-summary" style={{ fontSize: '12px', WebkitLineClamp: 2 }}>
+                    <p className="news-summary">
                       {blog.summary}
                     </p>
                   </div>
