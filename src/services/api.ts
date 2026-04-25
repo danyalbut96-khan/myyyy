@@ -250,3 +250,39 @@ IMPORTANT:
   const data = await response.json();
   return data.choices[0].message.content;
 };
+
+export interface HealthNewsItem {
+  id: string;
+  title: string;
+  summary: string;
+  source: string;
+  url: string;
+  date: string;
+  category: string;
+  imagePrompt: string;
+  imageUrl?: string;
+}
+
+export const fetchHealthNews = async (): Promise<HealthNewsItem[]> => {
+  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
+  const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  
+  const content = await fetchApi(
+    [{ 
+      role: 'user', 
+      content: `Provide 6 highly relevant and recent health/medical news items as of ${currentDate}. 
+      Respond ONLY with a JSON array of objects: [{id, title, summary, source, url, date, category, imagePrompt}]. 
+      Summaries should be 2-3 sentences. Categories like "Research", "Lifestyle", "Public Health", etc. 
+      Image prompts should be descriptive for an AI image generator. 
+      ${isUrdu ? "Important: Translate titles and summaries to Urdu (Nastaliq script) but keep source names and URLs in English." : ""}` 
+    }],
+    `You are a medical news aggregator. Return ONLY raw JSON array.`
+  );
+
+  try {
+    return JSON.parse(content) as HealthNewsItem[];
+  } catch (error) {
+    console.error("Failed to parse health news:", content);
+    return [];
+  }
+};

@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, Newspaper, ExternalLink, Calendar } from 'lucide-react';
+import { fetchHealthNews, type HealthNewsItem } from '../services/api';
 
 const COMMON_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen', 'Lisinopril', 'Metformin', 'Aspirin'];
 
@@ -10,12 +11,28 @@ export const Home = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [news, setNews] = useState<HealthNewsItem[]>([]);
+  const [loadingNews, setLoadingNews] = useState(true);
   const navigate = useNavigate();
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
   const words = isUrdu 
     ? ['ادویات', 'خوراک', 'متبادل', 'اثرات', 'قیمت'] 
     : ['Medicine', 'Dosage', 'Side Effects', 'Alternatives', 'Prices'];
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        const newsData = await fetchHealthNews();
+        setNews(newsData);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoadingNews(false);
+      }
+    };
+    loadNews();
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -85,7 +102,7 @@ export const Home = () => {
   return (
     <div className="fade-up">
       {/* Hero Section */}
-      <section className="section text-center" style={{ paddingTop: '100px' }}>
+      <section className="section text-center" style={{ paddingTop: '100px', paddingBottom: '60px' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-green">
@@ -122,9 +139,6 @@ export const Home = () => {
           </form>
 
           <div className="flex flex-col items-center gap-4">
-            <span className="text-muted" style={{ fontSize: '14px' }}>
-              {isUrdu ? 'یا ان عام ادویات میں سے کوئی آزمائیں:' : 'Or try one of these common medicines:'}
-            </span>
             <div className="flex flex-wrap justify-center gap-3 max-w-xl">
               {COMMON_MEDICINES.map((med) => (
                 <button
@@ -138,6 +152,79 @@ export const Home = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Health News Section */}
+      <section className="section bg-light" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+        <div className="container">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <div className="flex items-center gap-2 text-primary-accent font-semibold mb-2">
+                <Newspaper size={20} />
+                <span>{isUrdu ? 'تازہ ترین ہیلتھ اپڈیٹس' : 'Latest Health Updates'}</span>
+              </div>
+              <h2 style={{ fontSize: 'clamp(28px, 4vw, 36px)', fontWeight: 800 }}>
+                {isUrdu ? 'صحت کی دنیا سے اہم خبریں' : 'Top Medical & Health News'}
+              </h2>
+            </div>
+            {!loadingNews && (
+              <button onClick={() => window.location.reload()} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '14px' }}>
+                <RefreshCw size={16} /> {isUrdu ? 'ریفریش' : 'Refresh'}
+              </button>
+            )}
+          </div>
+
+          {loadingNews ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="news-card skeleton" style={{ height: 400 }}></div>
+              ))}
+            </div>
+          ) : (
+            <div className="news-grid">
+              {news.map((item) => (
+                <a 
+                  key={item.id} 
+                  href={item.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="news-card group"
+                >
+                  <div className="news-image-wrapper">
+                    <img 
+                      src={`https://images.unsplash.com/photo-${item.id}?auto=format&fit=crop&q=80&w=800&fallback=https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=800`} 
+                      alt={item.title} 
+                      className="news-image"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=800';
+                      }}
+                    />
+                    <div className="news-category-badge">{item.category}</div>
+                  </div>
+                  <div className="news-content">
+                    <div className="flex items-center gap-2 text-xs text-muted mb-3">
+                      <Calendar size={12} />
+                      <span>{item.date}</span>
+                      <span>•</span>
+                      <span>{item.source}</span>
+                    </div>
+                    <h3 className="news-title group-hover:text-primary-accent transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="news-summary">
+                      {item.summary}
+                    </p>
+                    <div className="news-footer">
+                      <span className="flex items-center gap-1">
+                        {isUrdu ? 'مزید پڑھیں' : 'Read Full Story'} <ExternalLink size={14} />
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
