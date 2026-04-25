@@ -7,8 +7,8 @@ const DisclaimerBar = () => {
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
   return (
     <div className="disclaimer-bar">
-      {isUrdu 
-        ? "⚕ طبی دستبرداری: صرف معلوماتی مقاصد کے لیے۔ ہمیشہ صحت کے پیشہ ور سے مشورہ کریں۔" 
+      {isUrdu
+        ? "⚕ طبی دستبرداری: صرف معلوماتی مقاصد کے لیے۔ ہمیشہ صحت کے پیشہ ور سے مشورہ کریں۔"
         : "⚕ Medical Disclaimer: For informational purposes only. Always consult a healthcare professional."}
     </div>
   );
@@ -50,7 +50,7 @@ const Navbar = () => {
             <span>MediFinder <span className="text-primary-accent">AI</span></span>
           </div>
         </Link>
-        
+
         <div className={`nav-links ${menuOpen ? 'open' : 'hidden lg:flex'}`}>
           <Link to="/" className="nav-pill" onClick={closeMenu}>
             <Search size={16} /> {isUrdu ? 'تلاش' : 'Search'}
@@ -70,7 +70,7 @@ const Navbar = () => {
           <Link to="/about" className="nav-pill" onClick={closeMenu}>
             <Info size={16} /> {isUrdu ? 'ہمارے بارے میں' : 'About'}
           </Link>
-          
+
           <button onClick={toggleLanguage} className="nav-pill" style={{ backgroundColor: 'var(--bg-color)', border: '1px solid var(--border)' }}>
             <Globe size={16} /> {isUrdu ? 'EN | اردو' : 'EN | اردو'}
           </button>
@@ -96,7 +96,7 @@ const Footer = () => {
                 MediFinder <span>AI</span>
               </Link>
               <p className="text-secondary" style={{ color: '#A0A09A' }}>
-                {isUrdu 
+                {isUrdu
                   ? "جدید ترین اے آئی پر مبنی میڈیسن سرچ انجن جو ادویات کی تفصیلی معلومات فوری فراہم کرتا ہے۔"
                   : "Advanced AI-powered medicine search engine providing detailed pharmaceutical information instantly."}
               </p>
@@ -118,7 +118,7 @@ const Footer = () => {
           </div>
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} MediFinder AI. All rights reserved.</p>
-            <p>Made with <span style={{ color: '#ff4d4d' }}>❤️</span> by <a href="https://cloudxify.site" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>CloudXify</a></p>
+            <p>Made with <span style={{ color: '#ff4d4d' }}>❤️</span> by <a href="https://cloudexify.site" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>Cloudexify</a></p>
           </div>
         </div>
       </footer>
