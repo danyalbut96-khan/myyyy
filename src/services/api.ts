@@ -1,4 +1,4 @@
-import { MedicineDetails } from '../types';
+import type { MedicineDetails } from '../types';
 
 export const getApiKey = () => sessionStorage.getItem('openrouter_api_key');
 export const setApiKey = (key: string) => sessionStorage.setItem('openrouter_api_key', key);

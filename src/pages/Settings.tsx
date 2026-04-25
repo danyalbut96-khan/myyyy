@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Key, Save, CheckCircle2 } from 'lucide-react';
 import { getApiKey, setApiKey } from '../services/api';
 
