@@ -7,8 +7,36 @@ const COMMON_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen
 export const Home = () => {
   const [query, setQuery] = useState('');
   const [history, setHistory] = useState<string[]>([]);
+  const [textIndex, setTextIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
+
+  const words = isUrdu 
+    ? ['ادویات', 'خوراک', 'متبادل', 'اثرات', 'قیمت'] 
+    : ['Medicine', 'Dosage', 'Side Effects', 'Alternatives', 'Prices'];
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const currentWord = words[textIndex % words.length];
+      
+      if (!isDeleting) {
+        setDisplayText(currentWord.substring(0, displayText.length + 1));
+        if (displayText === currentWord) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        setDisplayText(currentWord.substring(0, displayText.length - 1));
+        if (displayText === '') {
+          setIsDeleting(false);
+          setTextIndex(textIndex + 1);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, textIndex, words]);
 
   useEffect(() => {
     const savedHistory = localStorage.getItem('medifinder_history');
@@ -67,9 +95,9 @@ export const Home = () => {
           
           <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', marginBottom: '24px' }}>
             {isUrdu ? (
-              <>دوائیں فوری طور پر <br /><i className="text-primary-accent">دریافت کریں</i></>
+              <>دوائیں <i className="text-primary-accent" style={{ borderRight: '3px solid', paddingRight: '4px' }}>{displayText}</i> <br />دریافت کریں</>
             ) : (
-              <>Discover <i className="text-primary-accent">Medicine</i><br />Details Instantly</>
+              <>Discover <i className="text-primary-accent" style={{ borderRight: '3px solid', paddingRight: '4px' }}>{displayText}</i><br />Details Instantly</>
             )}
           </h1>
           

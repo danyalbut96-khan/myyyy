@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe, Pill } from 'lucide-react';
+import { Search, Info, ShieldAlert, FileText, MapPin, MessageSquare, Menu, X, Globe, Pill, ArrowRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ChatBot } from './ChatBot';
 
@@ -44,41 +44,52 @@ const Navbar = () => {
       <div className="nav-content flex items-center justify-between w-full">
         <Link to="/" className="logo" onClick={closeMenu}>
           <div className="flex items-center gap-2">
-            <div className="logo-icon">
-              <Pill size={24} />
+            <div className="logo-icon" style={{ width: 32, height: 32 }}>
+              <Pill size={20} />
             </div>
-            <span>MediFinder <span className="text-primary-accent">AI</span></span>
+            <span style={{ fontSize: 20 }}>MediFinder <span className="text-primary-accent">AI</span></span>
           </div>
         </Link>
+        
+        <div className="flex items-center gap-2">
+          <button onClick={toggleLanguage} className="nav-pill" style={{ padding: '6px 12px', fontSize: 13, backgroundColor: 'var(--bg-color)', border: '1px solid var(--border)' }}>
+            <Globe size={14} /> {isUrdu ? 'EN' : 'UR'}
+          </button>
 
-        <div className={`nav-links ${menuOpen ? 'open' : 'hidden lg:flex'}`}>
-          <Link to="/" className="nav-pill" onClick={closeMenu}>
-            <Search size={16} /> {isUrdu ? 'تلاش' : 'Search'}
-          </Link>
-          <Link to="/safety" className="nav-pill" onClick={closeMenu}>
-            <ShieldAlert size={16} /> {isUrdu ? 'حفاظتی جانچ' : 'Safety Checker'}
-          </Link>
-          <Link to="/prescription" className="nav-pill" onClick={closeMenu}>
-            <FileText size={16} /> {isUrdu ? 'نسخہ' : 'Prescription'}
-          </Link>
-          <Link to="/pharmacies" className="nav-pill" onClick={closeMenu}>
-            <MapPin size={16} /> {isUrdu ? 'فارمیسی' : 'Pharmacies'}
-          </Link>
-          <Link to="/chat" className="nav-pill" onClick={closeMenu}>
-            <MessageSquare size={16} /> {isUrdu ? 'میڈی باٹ' : 'MediBot'}
-          </Link>
-          <Link to="/about" className="nav-pill" onClick={closeMenu}>
-            <Info size={16} /> {isUrdu ? 'ہمارے بارے میں' : 'About'}
-          </Link>
-
-          <button onClick={toggleLanguage} className="nav-pill" style={{ backgroundColor: 'var(--bg-color)', border: '1px solid var(--border)' }}>
-            <Globe size={16} /> {isUrdu ? 'EN | اردو' : 'EN | اردو'}
+          <button className="flex items-center p-2 rounded-full hover:bg-gray-100" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        <button className="lg:hidden flex items-center p-2 rounded-full hover:bg-gray-100" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Full-screen / Overlay Menu */}
+        <div className={`nav-links ${menuOpen ? 'open' : 'hidden'}`}>
+          <div className="flex flex-col gap-2 w-full max-w-sm mx-auto">
+            <Link to="/" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><Search size={18} /> {isUrdu ? 'تلاش' : 'Search'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+            <Link to="/safety" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><ShieldAlert size={18} /> {isUrdu ? 'حفاظتی جانچ' : 'Safety Checker'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+            <Link to="/prescription" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><FileText size={18} /> {isUrdu ? 'نسخہ' : 'Prescription'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+            <Link to="/pharmacies" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><MapPin size={18} /> {isUrdu ? 'فارمیسی' : 'Pharmacies'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+            <Link to="/chat" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><MessageSquare size={18} /> {isUrdu ? 'میڈی باٹ' : 'MediBot'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+            <Link to="/about" className="nav-pill justify-between" onClick={closeMenu}>
+              <div className="flex items-center gap-3"><Info size={18} /> {isUrdu ? 'ہمارے بارے میں' : 'About'}</div>
+              <ArrowRight size={14} className="text-muted" />
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );
