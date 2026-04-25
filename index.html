@@ -4,7 +4,58 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MediFinder AI</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>MediFinder AI | AI-Powered Medicine Finder & Health Assistant</title>
+    <meta name="description" content="MediFinder AI is your premium health companion. Find medicine details, scan prescriptions, locate nearby pharmacies, and chat with our expert medical AI. Available in English & Urdu." />
+    <meta name="keywords" content="medicine finder, pharmacy locator, medical AI, prescription scanner, health assistant, drug interaction checker, generic medicine, Pakistan health app" />
+    <meta name="author" content="MediFinder Team" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://medifinder-ai.vercel.app/" />
+    <meta property="og:title" content="MediFinder AI | AI-Powered Medicine Finder & Health Assistant" />
+    <meta property="og:description" content="Find medicine details, scan prescriptions, and chat with our expert medical AI. Your premium healthcare companion." />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://medifinder-ai.vercel.app/" />
+    <meta property="twitter:title" content="MediFinder AI | AI-Powered Medicine Finder & Health Assistant" />
+    <meta property="twitter:description" content="Find medicine details, scan prescriptions, and chat with our expert medical AI. Your premium healthcare companion." />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "name": "MediFinder AI",
+      "description": "AI-Powered Medicine Finder and Health Assistant",
+      "url": "https://medifinder-ai.vercel.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://medifinder-ai.vercel.app/result?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "audience": {
+        "@type": "Patient",
+        "geographicArea": {
+          "@type": "Country",
+          "name": "Pakistan"
+        }
+      },
+      "about": [
+        {
+          "@type": "Drug",
+          "name": "Medicine Database"
+        },
+        {
+          "@type": "MedicalOrganization",
+          "name": "Pharmacy Finder"
+        }
+      ]
+    }
+    </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlPS--0XlFr05IbAgJGX8qjL97nuBVgL8&libraries=places"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

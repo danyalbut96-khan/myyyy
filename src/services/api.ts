@@ -193,12 +193,37 @@ export const analyzePrescription = async (base64Image: string, mimeType: string)
 };
 
 export const chatWithBot = async (messages: ChatMessage[]): Promise<string> => {
-  const formattedMessages = messages.map(m => ({
-    role: m.role,
-    content: m.content
-  }));
+  const formattedMessages = messages.map(m => {
+    if (m.imageUrl) {
+      return {
+        role: m.role,
+        content: [
+          { type: 'text', text: m.content || (m.role === 'user' ? 'Analyze this image.' : '') },
+          { type: 'image_url', image_url: { url: m.imageUrl } }
+        ]
+      };
+    }
+    return {
+      role: m.role,
+      content: m.content
+    };
+  });
 
-  const systemPrompt = `You are MediBot, an expert AI medical assistant for MediFinder AI. You ONLY answer questions about medicines, health conditions, symptoms, drug interactions, dosages, side effects, and general wellness. If someone asks about anything unrelated to health or medicine, politely say: 'I can only help with medicine and health-related questions. Please ask me about any medicine, symptom, or health concern.' Always recommend consulting a real doctor for serious conditions. Be friendly, clear, and use simple language. If the user writes in Urdu, respond in Urdu.` + getLangPrompt();
+  const systemPrompt = `You are MediBot, an expert AI medical and healthcare assistant for MediFinder AI. 
+Your expertise covers:
+1. Identifying medicines from images of packaging or prescriptions.
+2. Explaining medicine uses, dosages, and side effects.
+3. Providing general healthcare advice and wellness tips.
+4. Analyzing symptoms and suggesting potential causes (with a strong disclaimer).
+5. Comparing different medicines and suggesting generic alternatives.
+
+If an image is provided, analyze it carefully. If it's a medicine, identify it and provide details. If it's a medical report or prescription, explain the key points in simple terms.
+
+IMPORTANT: 
+- Always include a disclaimer: "I am an AI, not a doctor. Please consult a healthcare professional before taking any new medication."
+- Be empathetic and professional.
+- If the user writes in Urdu, respond in Urdu (using Nastaliq script where possible).
+- Keep medical terms in English but explain them if requested.` + getLangPrompt();
 
   const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -219,7 +244,8 @@ export const chatWithBot = async (messages: ChatMessage[]): Promise<string> => {
   });
 
   if (!response.ok) {
-    throw new Error("Chat failed");
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error?.message || "Chat failed");
   }
   const data = await response.json();
   return data.choices[0].message.content;

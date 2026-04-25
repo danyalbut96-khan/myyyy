@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Pill } from 'lucide-react';
+import { MessageSquare, X, Send, Pill, Image as ImageIcon } from 'lucide-react';
 import { chatWithBot } from '../services/api';
 import type { ChatMessage } from '../types';
 
@@ -8,8 +8,9 @@ export const ChatBot = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  // const navigate = useNavigate();
 
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
@@ -21,19 +22,38 @@ export const ChatBot = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeSelectedImage = () => {
+    setSelectedImage(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() && !selectedImage) return;
 
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
       content: input.trim(),
+      imageUrl: selectedImage || undefined,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     const newMessages = [...messages, newMessage];
     setMessages(newMessages);
     setInput('');
+    setSelectedImage(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
     setIsTyping(true);
 
     try {
@@ -50,25 +70,12 @@ export const ChatBot = () => {
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'system',
-        content: isUrdu ? 'معذرت، ایک خرابی پیش آ گئی ہے۔ براہ کرم دوبارہ کوشش کریں۔' : 'Sorry, an error occurred. Please try again.',
+        content: isUrdu ? 'معذرت، ایک خرابی پیش آ گئی ہے۔' : 'Sorry, an error occurred.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }]);
     } finally {
       setIsTyping(false);
     }
-  };
-
-  /*
-  const handleSearchClick = (_query: string) => {
-    setIsOpen(false);
-    navigate(`/result?q=${encodeURIComponent(_query)}`);
-  };
-  */
-
-  const renderMessageContent = (content: string) => {
-    // Simple parser to extract potential medicine names for quick search
-    // We can look for patterns or just render text. For now, simple text.
-    return <div style={{ whiteSpace: 'pre-wrap' }}>{content}</div>;
   };
 
   return (
@@ -93,10 +100,15 @@ export const ChatBot = () => {
           
           <div className="chat-messages">
             {messages.length === 0 && (
-              <div className="text-center text-muted mt-4">
-                {isUrdu 
-                  ? 'مجھ سے ادویات اور صحت کے بارے میں کچھ بھی پوچھیں'
-                  : 'Ask me anything about medicines & health'}
+              <div className="text-center text-muted mt-8 px-4">
+                <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                  <Pill size={24} />
+                </div>
+                <p style={{ fontSize: 14 }}>
+                  {isUrdu 
+                    ? 'مجھ سے ادویات، علامات یا صحت کے بارے میں پوچھیں۔ آپ تصویر بھی اپلوڈ کر سکتے ہیں۔'
+                    : 'Ask me anything about medicines or symptoms. You can also upload images.'}
+                </p>
               </div>
             )}
             
@@ -107,9 +119,14 @@ export const ChatBot = () => {
                     <Pill size={14} />
                   </div>
                 )}
-                <div>
-                  {renderMessageContent(msg.content)}
-                  <div style={{ fontSize: 10, opacity: 0.7, marginTop: 4, textAlign: msg.role === 'user' ? 'right' : 'left' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {msg.imageUrl && (
+                    <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
+                      <img src={msg.imageUrl} alt="Uploaded" style={{ maxWidth: '100%', display: 'block' }} />
+                    </div>
+                  )}
+                  <div style={{ whiteSpace: 'pre-wrap', fontSize: 14 }}>{msg.content}</div>
+                  <div style={{ fontSize: 9, opacity: 0.6, marginTop: 2, textAlign: msg.role === 'user' ? 'right' : 'left' }}>
                     {msg.timestamp}
                   </div>
                 </div>
@@ -122,27 +139,45 @@ export const ChatBot = () => {
                   <Pill size={14} />
                 </div>
                 <div className="flex items-center gap-1" style={{ height: 24 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'var(--text-muted)', animation: 'pulse 1s infinite' }} />
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'var(--text-muted)', animation: 'pulse 1s infinite 0.2s' }} />
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: 'var(--text-muted)', animation: 'pulse 1s infinite 0.4s' }} />
+                  <div className="dot-flashing" style={{ backgroundColor: 'var(--accent-primary)', width: 6, height: 6 }} />
+                  <div className="dot-flashing" style={{ backgroundColor: 'var(--accent-primary)', width: 6, height: 6, animationDelay: '0.2s' }} />
+                  <div className="dot-flashing" style={{ backgroundColor: 'var(--accent-primary)', width: 6, height: 6, animationDelay: '0.4s' }} />
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="chat-input-area">
-            <input
-              type="text"
-              className="chat-input"
-              placeholder={isUrdu ? 'پیغام ٹائپ کریں...' : 'Type a message...'}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            />
-            <button className="chat-send" onClick={handleSend} disabled={!input.trim() || isTyping}>
-              <Send size={18} />
-            </button>
+          <div className="chat-input-area" style={{ flexDirection: 'column', gap: 8 }}>
+            {selectedImage && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', backgroundColor: 'var(--bg-color)', borderRadius: 8 }}>
+                <img src={selectedImage} alt="Preview" style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 4 }} />
+                <button onClick={removeSelectedImage} style={{ color: 'red' }}><X size={14} /></button>
+              </div>
+            )}
+            <div style={{ display: 'flex', gap: 8, width: '100%' }}>
+              <button 
+                className="chat-action-btn" 
+                onClick={() => fileInputRef.current?.click()}
+                style={{ padding: 8, borderRadius: 8, backgroundColor: 'var(--accent-light)', color: 'var(--accent-primary)' }}
+              >
+                <ImageIcon size={18} />
+              </button>
+              <input type="file" ref={fileInputRef} hidden accept="image/*" onChange={handleImageUpload} />
+              
+              <input
+                type="text"
+                className="chat-input"
+                placeholder={isUrdu ? 'پیغام...' : 'Type...'}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                style={{ padding: '8px 12px' }}
+              />
+              <button className="chat-send" onClick={handleSend} disabled={(!input.trim() && !selectedImage) || isTyping} style={{ width: 36, height: 36 }}>
+                <Send size={16} />
+              </button>
+            </div>
           </div>
         </div>
       )}
