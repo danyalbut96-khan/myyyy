@@ -176,14 +176,20 @@ export const Home = () => {
           </div>
 
           {loadingNews ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="news-card skeleton" style={{ height: 400 }}></div>
+            <div className="news-grid">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="news-card" style={{ height: 320 }}>
+                  <div className="news-image-wrapper skeleton-loading"></div>
+                  <div className="news-content">
+                    <div className="skeleton-loading" style={{ height: 20, width: '80%', marginBottom: 12 }}></div>
+                    <div className="skeleton-loading" style={{ height: 40, width: '100%' }}></div>
+                  </div>
+                </div>
               ))}
             </div>
           ) : (
             <div className="news-grid">
-              {news.map((item) => (
+              {news.slice(0, 4).map((item) => (
                 <a 
                   key={item.id} 
                   href={item.url} 
@@ -193,18 +199,17 @@ export const Home = () => {
                 >
                   <div className="news-image-wrapper">
                     <img 
-                      src={`https://images.unsplash.com/photo-${item.id}?auto=format&fit=crop&q=80&w=800&fallback=https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=800`} 
+                      src={`https://images.unsplash.com/photo-${item.id}?auto=format&fit=crop&q=80&w=600&fallback=https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=600`} 
                       alt={item.title} 
                       className="news-image"
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=800';
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=600';
                       }}
                     />
                     <div className="news-category-badge">{item.category}</div>
                   </div>
                   <div className="news-content">
-                    <div className="flex items-center gap-2 text-xs text-muted mb-3">
-                      <Calendar size={12} />
+                    <div className="flex items-center gap-2 text-xs text-muted mb-2">
                       <span>{item.date}</span>
                       <span>•</span>
                       <span>{item.source}</span>
@@ -215,11 +220,6 @@ export const Home = () => {
                     <p className="news-summary">
                       {item.summary}
                     </p>
-                    <div className="news-footer">
-                      <span className="flex items-center gap-1">
-                        {isUrdu ? 'مزید پڑھیں' : 'Read Full Story'} <ExternalLink size={14} />
-                      </span>
-                    </div>
                   </div>
                 </a>
               ))}
@@ -274,6 +274,26 @@ export const Home = () => {
                 ? 'آپ کے آلے پر محفوظ کردہ کوئیک ایکسیس ہسٹری لاگ کے ساتھ اپنی تازہ ترین پوچھ گچھ کا ٹریک رکھیں۔'
                 : 'Keep track of your latest inquiries with a quick-access history log saved securely on your device.'}</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon: Personal Health Profile */}
+      <section className="section container">
+        <div className="coming-soon-card">
+          <div className="coming-soon-badge">{isUrdu ? 'جلد آ رہا ہے' : 'Coming Soon'}</div>
+          <h2 style={{ fontSize: '32px', marginBottom: '16px' }}>
+            {isUrdu ? 'آپ کا ذاتی ہیلتھ پروفائل' : 'Your Personal Health Profile'}
+          </h2>
+          <p className="text-muted mx-auto" style={{ maxWidth: '600px', marginBottom: '32px' }}>
+            {isUrdu
+              ? 'اپنا اکاؤنٹ بنائیں اور اپنی طبی تاریخ (جیسے ذیابیطس یا بلڈ پریشر) محفوظ کریں۔ میڈی فائنڈر آپ کو ایسی ادویات کے بارے میں خودکار طور پر خبردار کرے گا جو آپ کے لیے خطرناک ہو سکتی ہیں۔'
+              : 'Create your account and store your medical history (like diabetes or hypertension). MediFinder will automatically warn you about medications that might be unsafe for your specific condition.'}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="chip" style={{ opacity: 0.7 }}><ShieldAlert size={14} /> {isUrdu ? 'سمارٹ الرٹس' : 'Smart Alerts'}</div>
+            <div className="chip" style={{ opacity: 0.7 }}><History size={14} /> {isUrdu ? 'تاریخ کا مطالعہ' : 'Full History Sync'}</div>
+            <div className="chip" style={{ opacity: 0.7 }}><FlaskConical size={14} /> {isUrdu ? 'ذاتی تجاویز' : 'Personalized Recommendations'}</div>
           </div>
         </div>
       </section>
