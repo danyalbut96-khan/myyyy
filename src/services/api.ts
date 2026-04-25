@@ -1,9 +1,5 @@
 import type { MedicineDetails } from '../types';
 
-export const getApiKey = () => sessionStorage.getItem('openrouter_api_key');
-export const setApiKey = (key: string) => sessionStorage.setItem('openrouter_api_key', key);
-export const hasApiKey = () => !!getApiKey();
-
 const SYSTEM_PROMPT = `You are MediFinder AI, a professional medical database assistant. 
 Your job is to provide accurate, structured details for a given medicine/drug/tablet name.
 You must output ONLY raw JSON, with no markdown formatting, no \`\`\`json blocks, and no additional text.
@@ -34,10 +30,10 @@ Provide 12 to 15 items in the alternatives array.
 If the medicine is not found, try your best to guess what the user meant, or return a similar popular medicine.`;
 
 export const fetchMedicineDetails = async (medicineName: string): Promise<MedicineDetails> => {
-  const apiKey = getApiKey();
+  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
   
   if (!apiKey) {
-    throw new Error('API Key is missing. Please set your OpenRouter API key in Settings.');
+    throw new Error('API Key is missing. Please configure VITE_OPENROUTER_API_KEY in Vercel environment variables.');
   }
 
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {

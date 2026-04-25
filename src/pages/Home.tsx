@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Pill, ArrowRight } from 'lucide-react';
-import { hasApiKey } from '../services/api';
 
 const SAMPLE_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen', 'Lisinopril'];
 
@@ -13,21 +12,10 @@ export const Home = () => {
     e.preventDefault();
     if (!query.trim()) return;
     
-    if (!hasApiKey()) {
-      alert('Please set your OpenRouter API key in Settings first.');
-      navigate('/settings');
-      return;
-    }
-    
     navigate(`/result?q=${encodeURIComponent(query)}`);
   };
 
   const handleChipClick = (med: string) => {
-    if (!hasApiKey()) {
-      alert('Please set your OpenRouter API key in Settings first.');
-      navigate('/settings');
-      return;
-    }
     navigate(`/result?q=${encodeURIComponent(med)}`);
   };
 

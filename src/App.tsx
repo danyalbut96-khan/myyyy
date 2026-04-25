@@ -5,7 +5,6 @@ import { Result } from './pages/Result';
 import { About } from './pages/About';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { Terms } from './pages/Terms';
-import { Settings } from './pages/Settings';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="terms" element={<Terms />} />
-          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>

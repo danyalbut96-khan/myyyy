@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Search, Settings, Info, Menu, X } from 'lucide-react';
+import { Search, Info, Menu, X, Moon, Sun } from 'lucide-react';
 
 const DisclaimerBanner = ({ isFooter = false }) => (
   <div className={`disclaimer-banner ${isFooter ? 'disclaimer-footer' : ''}`}>
@@ -10,7 +10,30 @@ const DisclaimerBanner = ({ isFooter = false }) => (
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
   const location = useLocation();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setTheme('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
@@ -18,7 +41,6 @@ const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'Search', icon: <Search size={18} /> },
     { path: '/about', label: 'About', icon: <Info size={18} /> },
-    { path: '/settings', label: 'Settings', icon: <Settings size={18} /> },
   ];
 
   return (
@@ -29,9 +51,15 @@ const Navbar = () => {
           <span className="text-gradient">MediFinder</span> AI
         </Link>
         
-        <button className="mobile-menu-btn text-main" onClick={toggleMenu}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-4">
+          <button onClick={toggleTheme} className="text-muted hover:text-main transition-colors flex items-center justify-center p-2 rounded-full" style={{ background: 'var(--chip-bg)' }}>
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          
+          <button className="mobile-menu-btn text-main" onClick={toggleMenu}>
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
           {navLinks.map((link) => (
@@ -73,7 +101,6 @@ const Footer = () => (
           <ul className="footer-links">
             <li><Link to="/" className="footer-link">Home Search</Link></li>
             <li><Link to="/about" className="footer-link">About Us</Link></li>
-            <li><Link to="/settings" className="footer-link">API Settings</Link></li>
           </ul>
         </div>
       </div>
