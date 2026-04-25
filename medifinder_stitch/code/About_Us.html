@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About MediFinder AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#161b2b",
+                    "surface": "#0e1322",
+                    "surface-dim": "#0e1322",
+                    "primary-container": "#63b3ed",
+                    "primary": "#90cdff",
+                    "secondary": "#59dad0",
+                    "background": "#0e1322",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#001e30",
+                    "secondary-fixed-dim": "#59dad0",
+                    "on-background": "#dee1f7",
+                    "on-primary-container": "#004466",
+                    "tertiary-fixed": "#dbe2f7",
+                    "surface-bright": "#343949",
+                    "on-tertiary-fixed-variant": "#3f4758",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1a1f2f",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "tertiary-container": "#a4acc0",
+                    "primary-fixed-dim": "#8ecdff",
+                    "on-surface-variant": "#bfc7d1",
+                    "tertiary": "#bfc7dc",
+                    "tertiary-fixed-dim": "#bfc6db",
+                    "on-tertiary": "#293040",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#00201e",
+                    "outline": "#8a929a",
+                    "surface-tint": "#8ecdff",
+                    "on-tertiary-fixed": "#141c2b",
+                    "on-tertiary-container": "#384051",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#003532",
+                    "surface-container-highest": "#2f3445",
+                    "secondary-fixed": "#79f6ec",
+                    "on-secondary": "#003734",
+                    "on-primary": "#00344f",
+                    "surface-variant": "#2f3445",
+                    "inverse-primary": "#006494",
+                    "surface-container-high": "#25293a",
+                    "inverse-surface": "#dee1f7",
+                    "outline-variant": "#40484f",
+                    "on-surface": "#dee1f7",
+                    "on-error": "#690005",
+                    "surface-container-lowest": "#090e1c",
+                    "primary-fixed": "#cbe6ff",
+                    "inverse-on-surface": "#2b3040",
+                    "secondary-container": "#00a89f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "lg": "48px",
+                    "xl": "80px",
+                    "md": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["DM Sans"],
+                    "label-caps": ["DM Sans"],
+                    "h1": ["Playfair Display"],
+                    "h3": ["Playfair Display"],
+                    "h2": ["Playfair Display"],
+                    "body-sm": ["DM Sans"],
+                    "body-md": ["DM Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(22, 30, 45, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .mesh-gradient-bg {
+            background: radial-gradient(at 0% 0%, rgba(99, 179, 237, 0.05) 0px, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(89, 218, 208, 0.05) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary/30">
+<header class="fixed top-0 w-full z-50 bg-[#0a0f1e]/80 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+<nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto font-sans antialiased tracking-tight">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">MediFinder</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-blue-400 border-b-2 border-blue-400 pb-1" href="#">About</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold tracking-widest text-blue-400 uppercase">Emergency: 911</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-white/5 p-2 rounded-full transition-all">search</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-xl px-6 max-w-7xl mx-auto space-y-xl">
+<section class="relative">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md items-center">
+<div class="space-y-md">
+<span class="text-label-caps font-label-caps text-secondary uppercase tracking-widest">Our Mission</span>
+<h1 class="text-h1 font-h1 text-on-surface">Democratizing Medical Intelligence</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">
+                        MediFinder AI is dedicated to providing accessible medical information through advanced AI. We bridge the gap between complex pharmaceutical data and everyday understanding.
+                    </p>
+</div>
+<div class="relative h-[400px] rounded-xl overflow-hidden glass-panel">
+<img class="w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="Modern clinical laboratory environment with high-tech medical research equipment and soft blue atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAnvdkju00LP4GW4hkjd5eminp5xKdh2ufKRxyv-iEI3CCAGP4AGiMLcssJT2u-kePxblBTsCee63-_qWkq2aEG58tRyt5XgDWc0KZQ4Aj1HDCf-taJ6N97tntGdrX2O5eVyOepsF11oSIX-nuYusvNpgjthCOEscWZoMD9NcOP2-bftJQI4tKjEH48VXpuEcO7lgPDQEgZUYEbGsGXmPEuN_X-XbOGTdH4X4gXXMFA8gHYaVi4DmZYv1hcCYEufNr5ZD-WNEDZqY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+</div>
+</section>
+<section class="space-y-lg">
+<div class="text-center space-y-xs">
+<h2 class="text-h2 font-h2 text-on-surface">The Intelligence Behind</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Leveraging frontier models to provide clinical-grade insights.</p>
+</div>
+<div class="glass-panel rounded-xl p-lg mesh-gradient-bg border-secondary/20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="space-y-sm">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined">api</span>
+</div>
+<h3 class="text-h3 font-h3">OpenRouter API</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                            We utilize the OpenRouter API to orchestrate queries across multiple frontier LLMs, ensuring you receive the most accurate and up-to-date pharmaceutical context available.
+                        </p>
+</div>
+<div class="space-y-sm">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<h3 class="text-h3 font-h3">Clinical Grounding</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                            Our AI is specifically prompted to prioritize established medical databases, cross-referencing information to minimize hallucination in critical dosage data.
+                        </p>
+</div>
+<div class="space-y-sm">
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-tertiary-container/10 text-tertiary">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<h3 class="text-h3 font-h3">Structured Data</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                            Raw API responses are parsed into our proprietary visualization components, transforming abstract data into legible medical cards.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-lg">
+<h2 class="text-h2 font-h2 text-on-surface text-center">Meet the Pioneers</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<div class="glass-panel p-md rounded-xl space-y-md group hover:border-primary/50 transition-all duration-300">
+<div class="aspect-square rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all" data-alt="Professional portrait of a female medical researcher in a dark navy lab coat with serious, confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5uPUMS5bdkIiOY96ksCw2iVfJqJWicMehLmFDdFmzsYDo-nlakAExvB9_YpxGX8s4gWl9lzXeGlYRk2OP1TWaKrkA0fnWca6lrMp919qTGwGHD9RPyXrBYcrVp5otQwtnf0C6Q9y93u_7Z2YlbNWVEodFK9LQDXJbjEScM8ICQaiXW9j59MEIBa57kSUCu4NCdVt01hRK7i_5XD9duz-JnGydvoRUYHg7WaGSXVaZ-DWkqFxpWMuA1xrZySPbtodX24aHpPf2GnM"/>
+</div>
+<div>
+<h4 class="text-h3 font-h3 text-on-surface">Dr. Sarah Chen</h4>
+<p class="text-label-caps font-label-caps text-secondary">Chief Medical Officer</p>
+</div>
+</div>
+<div class="glass-panel p-md rounded-xl space-y-md group hover:border-primary/50 transition-all duration-300">
+<div class="aspect-square rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all" data-alt="Portrait of a male data scientist with glasses in a modern dark office setting, thoughtful look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPWdRH6jz8bmEasrs5tFz81JbJ8KbFkgaCficupDpS4ciblJhVBADfcMKthzyj1gHTzxxFMXpG7qzJnMTq3_nnZyMH465X2_tECE_EFvUx49LrJ83GN11SumsXhD76NaiEggyClzTDByQx1xz4EhsvGqMNns06egBEQPgz-3hSeMfPGG7l41YRYUACD30hbPLp5JNxgbcYx38CQJc9b-8kTisSz9_9RKDSxmCEMXI6fuxNr7hLnZ8q6a8AwXtwJkRVSVr9I0HcaXY"/>
+</div>
+<div>
+<h4 class="text-h3 font-h3 text-on-surface">Marcus Thorne</h4>
+<p class="text-label-caps font-label-caps text-secondary">Head of AI Research</p>
+</div>
+</div>
+<div class="glass-panel p-md rounded-xl space-y-md group hover:border-primary/50 transition-all duration-300">
+<div class="aspect-square rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all" data-alt="Professional female engineer in tech environment, soft background bokeh of data screens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe-JdECUn6u82g4Ux4a3shXuf7TbKC2QB_X3zsFzLHYyQrUyo9zlcPqqHewQVAe49OcOLI4Tsnj2zF2rIOGKyQ-6n_qbUiP5OLsR-byavrYthdc-SO_-s6dvczei9Cnq-B1-BjiVlfWU3hiA505BhqypgR_7_NzCT_EQ8axXrR_gdxzbsGnF6sd6p2Ev2DIfyOpHyb2pG1E2D6TyzM9zhc6M3T5X0CA3iW1tJ6uO-W6RUNUn5kmc7_CQMpoKz2LMwoK868L1y2bBg"/>
+</div>
+<div>
+<h4 class="text-h3 font-h3 text-on-surface">Elena Rodriguez</h4>
+<p class="text-label-caps font-label-caps text-secondary">UX Architect</p>
+</div>
+</div>
+<div class="glass-panel p-md rounded-xl space-y-md group hover:border-primary/50 transition-all duration-300">
+<div class="aspect-square rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all" data-alt="Confident male executive in formal attire with subtle medical branding in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8LtRukRBtDClHQGvuLWYW06v1-Q3w3tNjVK_r_EN3J_6nXa9bBcwybjstdLfjTlzepTHyLJR8emjMXfyZITP5FNNZ9Zzc6gmw9HPvokceZ7TtLjgkmv7Y6G0Kj045akFeHn5A-U427lmGvdZEfTsBwmG8IoTQ146_xa9nm20YVWmhrzn1dCD689rsCPAWbi4XeFMH9y1w3elwKh9O11K6qv2HJnJyhts6DYVz998bf9ULRiO4B2aSoiJu5uDJwI43qRat32J2lro"/>
+</div>
+<div>
+<h4 class="text-h3 font-h3 text-on-surface">Julian Vane</h4>
+<p class="text-label-caps font-label-caps text-secondary">Operations Lead</p>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-4xl mx-auto">
+<div class="bg-error-container/10 border border-error/20 p-lg rounded-xl space-y-md">
+<div class="flex items-center gap-sm text-error">
+<span class="material-symbols-outlined">warning</span>
+<h3 class="text-h3 font-h3 uppercase tracking-tighter">Medical Disclaimer</h3>
+</div>
+<div class="space-y-md text-on-surface-variant font-body-md">
+<p>MediFinder AI is an information retrieval tool and not a substitute for professional medical advice, diagnosis, or treatment. The information provided is generated by artificial intelligence leveraging various language models via OpenRouter.</p>
+<p>While we strive for accuracy, AI models can occasionally generate incorrect or incomplete information. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+<p>Never disregard professional medical advice or delay in seeking it because of something you have read on this platform.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0a0f1e] w-full border-t border-white/5 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+<div class="space-y-md">
+<div class="text-lg font-bold text-white">MediFinder</div>
+<p class="text-xs font-medium uppercase tracking-widest text-gray-500 leading-relaxed max-w-sm">
+                    © 2024 MediFinder AI. For informational purposes only. Not medical advice.
+                </p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end">
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Home</a>
+<a class="text-xs font-medium uppercase tracking-widest text-white hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">About</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Privacy</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Terms</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Settings</a>
+</div>
+</div>
+</footer>
+</body></html>

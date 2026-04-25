@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#161b2b",
+                        "surface": "#0e1322",
+                        "surface-dim": "#0e1322",
+                        "primary-container": "#63b3ed",
+                        "primary": "#90cdff",
+                        "secondary": "#59dad0",
+                        "background": "#0e1322",
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-primary-fixed": "#001e30",
+                        "secondary-fixed-dim": "#59dad0",
+                        "on-background": "#dee1f7",
+                        "on-primary-container": "#004466",
+                        "tertiary-fixed": "#dbe2f7",
+                        "surface-bright": "#343949",
+                        "on-tertiary-fixed-variant": "#3f4758",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1a1f2f",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "tertiary-container": "#a4acc0",
+                        "primary-fixed-dim": "#8ecdff",
+                        "on-surface-variant": "#bfc7d1",
+                        "tertiary": "#bfc7dc",
+                        "tertiary-fixed-dim": "#bfc6db",
+                        "on-tertiary": "#293040",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#00201e",
+                        "outline": "#8a929a",
+                        "surface-tint": "#8ecdff",
+                        "on-tertiary-fixed": "#141c2b",
+                        "on-tertiary-container": "#384051",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#003532",
+                        "surface-container-highest": "#2f3445",
+                        "secondary-fixed": "#79f6ec",
+                        "on-secondary": "#003734",
+                        "on-primary": "#00344f",
+                        "surface-variant": "#2f3445",
+                        "inverse-primary": "#006494",
+                        "surface-container-high": "#25293a",
+                        "inverse-surface": "#dee1f7",
+                        "outline-variant": "#40484f",
+                        "on-surface": "#dee1f7",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#090e1c",
+                        "primary-fixed": "#cbe6ff",
+                        "inverse-on-surface": "#2b3040",
+                        "secondary-container": "#00a89f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "label-caps": ["DM Sans"],
+                        "h1": ["Playfair Display"],
+                        "h3": ["Playfair Display"],
+                        "h2": ["Playfair Display"],
+                        "body-sm": ["DM Sans"],
+                        "body-md": ["DM Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-surface {
+            background: rgba(22, 30, 45, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ai-mesh {
+            background-image: radial-gradient(at 0% 0%, rgba(99, 179, 237, 0.05) 0px, transparent 50%), 
+                              radial-gradient(at 100% 0%, rgba(89, 218, 208, 0.05) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-[#0a0f1e]/80 backdrop-blur-xl shadow-2xl font-sans antialiased tracking-tight">
+<div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">MediFinder</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">About</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-white/5 rounded-full px-4 py-1.5 border border-white/10">
+<span class="material-symbols-outlined text-blue-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white w-48" placeholder="Search medicines..." type="text" value="Paracetamol"/>
+</div>
+<div class="text-blue-400 font-label-caps text-[10px] md:text-label-caps uppercase border border-blue-400/30 px-3 py-1 rounded-full">Emergency: 911</div>
+</div>
+</div>
+</nav>
+<main class="mt-24 max-w-7xl mx-auto px-6 pb-20">
+<!-- Disclaimer Banner -->
+<div class="mb-8 p-3 rounded-lg border border-error/20 bg-error-container/10 flex items-center gap-3">
+<span class="material-symbols-outlined text-error" data-weight="fill">warning</span>
+<p class="text-body-sm text-on-error-container">Medical Disclaimer: The information provided is for educational purposes only. Consult a healthcare professional before making any medical decisions.</p>
+</div>
+<!-- Medicine Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Primary Details -->
+<div class="lg:col-span-8 space-y-gutter">
+<div class="glass-surface p-md rounded-xl space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<h1 class="font-h1 text-h1 text-white">Paracetamol</h1>
+<div class="bg-secondary/10 border border-secondary/30 text-secondary px-4 py-1 rounded-full font-label-caps uppercase">Analgesic &amp; Antipyretic</div>
+</div>
+<p class="text-body-lg text-primary">Generic Name: Acetaminophen</p>
+</div>
+<div class="text-right">
+<span class="text-body-sm text-outline block uppercase tracking-widest font-label-caps">Manufacturer</span>
+<span class="text-body-md text-on-surface">GSK (GlaxoSmithKline) &amp; Various</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-6 border-t border-white/5">
+<div class="space-y-4">
+<div>
+<label class="text-label-caps text-outline uppercase block mb-1">Chemical Formula</label>
+<p class="text-body-md font-mono text-white">C<sub>8</sub>H<sub>9</sub>NO<sub>2</sub></p>
+</div>
+<div>
+<label class="text-label-caps text-outline uppercase block mb-1">Active Salts</label>
+<p class="text-body-md text-on-surface">N-acetyl-para-aminophenol</p>
+</div>
+<div>
+<label class="text-label-caps text-outline uppercase block mb-1">Common Brands</label>
+<p class="text-body-md text-on-surface">Panadol, Tylenol, Calpol, Excedrin</p>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-label-caps text-outline uppercase block mb-1">Primary Uses</label>
+<ul class="list-disc list-inside text-body-md text-on-surface marker:text-secondary">
+<li>Relief of mild to moderate pain</li>
+<li>Reduction of fever</li>
+<li>Headache &amp; Muscle aches</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Summary Component -->
+<div class="glass-surface ai-mesh p-md rounded-xl border-secondary/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-secondary text-5xl">auto_awesome</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<h3 class="font-h3 text-h3 text-secondary">AI Insights: Plain Language Summary</h3>
+</div>
+<p class="text-body-lg text-on-surface italic leading-relaxed">
+                        "Paracetamol is a widely used over-the-counter medicine primarily taken to lower high temperatures and relieve various types of pain, from headaches to joint stiffness. Unlike Ibuprofen, it doesn't reduce inflammation, but it's generally gentler on the stomach. It works by blocking chemical messengers in the brain that tell us we are in pain and helps regulate the body's internal thermostat."
+                    </p>
+</div>
+</div>
+<!-- Right: Secondary/Caution Details -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="glass-surface p-md rounded-xl space-y-6">
+<h3 class="font-h3 text-h3 text-white border-b border-white/5 pb-2">Dosage &amp; Usage</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<div>
+<p class="text-body-md text-on-surface font-semibold">Standard Adult Dose</p>
+<p class="text-body-sm text-outline">500mg - 1000mg every 4-6 hours.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error">priority_high</span>
+<div>
+<p class="text-body-md text-on-surface font-semibold">Maximum Dose</p>
+<p class="text-body-sm text-outline">4000mg (4 grams) in 24 hours.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-surface p-md rounded-xl space-y-6">
+<h3 class="font-h3 text-h3 text-white border-b border-white/5 pb-2">Contraindications</h3>
+<div class="space-y-3">
+<div class="p-3 bg-error-container/5 border border-error/10 rounded-lg">
+<p class="text-body-sm text-on-surface"><span class="text-error font-bold uppercase mr-2">Severe Liver Disease:</span> Significant risk of hepatotoxicity.</p>
+</div>
+<div class="p-3 bg-white/5 border border-white/5 rounded-lg">
+<p class="text-body-sm text-on-surface"><span class="text-primary font-bold uppercase mr-2">Alcohol Consumption:</span> Heavy drinkers should consult a doctor due to liver stress.</p>
+</div>
+</div>
+</div>
+<div class="glass-surface p-md rounded-xl">
+<h3 class="font-h3 text-h3 text-white border-b border-white/5 pb-2 mb-4">Side Effects</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-white/5 rounded-full text-body-sm text-on-surface border border-white/10">Nausea</span>
+<span class="px-3 py-1 bg-white/5 rounded-full text-body-sm text-on-surface border border-white/10">Stomach Pain</span>
+<span class="px-3 py-1 bg-white/5 rounded-full text-body-sm text-on-surface border border-white/10">Loss of Appetite</span>
+<span class="px-3 py-1 bg-white/5 rounded-full text-body-sm text-on-surface border border-white/10">Rash (Rare)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Alternatives Grid Section -->
+<section class="mt-xl space-y-md">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-h2 text-h2 text-white">Alternative Medicines</h2>
+<p class="text-body-md text-outline">Related therapeutic options and comparable generic alternatives.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 glass-surface rounded-full hover:bg-primary/20 transition-all"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 glass-surface rounded-full hover:bg-primary/20 transition-all"><span class="material-symbols-outlined">sort</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-md">
+<!-- Alternative Card 1 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">NSAID</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Ibuprofen</h3>
+<p class="text-body-sm text-outline mb-4">Anti-inflammatory used for pain and swelling.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Generic</span>
+<span class="text-[10px] font-label-caps text-primary">Advil, Motrin</span>
+</div>
+</div>
+<!-- Alternative Card 2 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">NSAID</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Naproxen</h3>
+<p class="text-body-sm text-outline mb-4">Longer-lasting pain relief for chronic conditions.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Generic</span>
+<span class="text-[10px] font-label-caps text-primary">Aleve</span>
+</div>
+</div>
+<!-- Alternative Card 3 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">Salicylate</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Aspirin</h3>
+<p class="text-body-sm text-outline mb-4">Relieves pain and reduces blood clot risk.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Generic</span>
+<span class="text-[10px] font-label-caps text-primary">Bayer</span>
+</div>
+</div>
+<!-- Alternative Card 4 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">Analgesic</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Panadol Extra</h3>
+<p class="text-body-sm text-outline mb-4">Paracetamol with caffeine boost for fast relief.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Brand</span>
+<span class="text-[10px] font-label-caps text-primary">GSK</span>
+</div>
+</div>
+<!-- Alternative Card 5 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">Analgesic</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Calpol</h3>
+<p class="text-body-sm text-outline mb-4">Liquid suspension form usually for pediatric use.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Brand</span>
+<span class="text-[10px] font-label-caps text-primary">Paediatric</span>
+</div>
+</div>
+<!-- Alternative Card 6 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">Combination</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Excedrin Migraine</h3>
+<p class="text-body-sm text-outline mb-4">Mix of Acetaminophen, Aspirin and Caffeine.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Brand</span>
+<span class="text-[10px] font-label-caps text-primary">Various</span>
+</div>
+</div>
+<!-- Alternative Card 7 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">Opioid/Analgesic</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Co-codamol</h3>
+<p class="text-body-sm text-outline mb-4">Combination of Paracetamol and Codeine.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Generic</span>
+<span class="text-[10px] font-label-caps text-primary">Prescription Only</span>
+</div>
+</div>
+<!-- Alternative Card 8 -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="text-label-caps text-secondary uppercase bg-secondary/10 px-2 py-0.5 rounded">NSAID</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h3 class="font-h3 text-body-lg text-white mb-1">Diclofenac</h3>
+<p class="text-body-sm text-outline mb-4">Stronger relief for joint pain and swelling.</p>
+<div class="pt-3 border-t border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase">Generic</span>
+<span class="text-[10px] font-label-caps text-primary">Voltaren</span>
+</div>
+</div>
+<!-- Alternative Card 9-12 (Compact) -->
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<h3 class="font-h3 text-body-lg text-white mb-1">Tramadol</h3>
+<p class="text-body-sm text-outline">Severe pain management.</p>
+<div class="pt-2 flex justify-between"><span class="text-[10px] font-label-caps text-primary">Generic</span></div>
+</div>
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<h3 class="font-h3 text-body-lg text-white mb-1">Nimesulide</h3>
+<p class="text-body-sm text-outline">Acute pain relief.</p>
+<div class="pt-2 flex justify-between"><span class="text-[10px] font-label-caps text-primary">Generic</span></div>
+</div>
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<h3 class="font-h3 text-body-lg text-white mb-1">Lornoxicam</h3>
+<p class="text-body-sm text-outline">NSAID class relief.</p>
+<div class="pt-2 flex justify-between"><span class="text-[10px] font-label-caps text-primary">Generic</span></div>
+</div>
+<div class="glass-surface p-sm rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<h3 class="font-h3 text-body-lg text-white mb-1">Etoricoxib</h3>
+<p class="text-body-sm text-outline">Joint pain specificity.</p>
+<div class="pt-2 flex justify-between"><span class="text-[10px] font-label-caps text-primary">Brand</span></div>
+</div>
+</div>
+</section>
+<!-- Final Disclaimer Banner -->
+<div class="mt-xl p-6 rounded-xl border border-white/5 bg-surface-container-low text-center">
+<h4 class="font-h3 text-h3 text-white mb-2">Notice to Users</h4>
+<p class="text-body-md text-outline max-w-2xl mx-auto">
+                Always read the patient information leaflet that comes with your medicine for a full list of side effects and advice. This database is powered by AI and should not replace clinical consultation.
+            </p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 pt-12 pb-8 bg-[#0a0f1e]">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="text-lg font-bold text-white">MediFinder AI</div>
+<p class="text-xs font-medium uppercase tracking-widest text-gray-500 leading-loose">© 2024 MediFinder AI. For informational purposes only. Not medical advice.</p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-start">
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Home</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">About</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Privacy</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Terms</a>
+<a class="text-xs font-medium uppercase tracking-widest text-gray-500 hover:text-teal-400 hover:underline decoration-teal-500 underline-offset-4 transition-all" href="#">Settings</a>
+</div>
+</div>
+</footer>
+</body></html>

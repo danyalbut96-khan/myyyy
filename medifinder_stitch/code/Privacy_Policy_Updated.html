@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privacy Policy - MediFinder AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#2f3445",
+                    "surface-container": "#1a1f2f",
+                    "tertiary-container": "#009eb9",
+                    "secondary-fixed": "#e1e0ff",
+                    "surface-dim": "#0e1322",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "inverse-primary": "#6d3bd7",
+                    "on-error-container": "#ffdad6",
+                    "on-error": "#690005",
+                    "primary-fixed": "#e9ddff",
+                    "tertiary-fixed": "#acedff",
+                    "background": "#0e1322",
+                    "on-tertiary-fixed": "#001f26",
+                    "primary-fixed-dim": "#d0bcff",
+                    "on-primary-container": "#340080",
+                    "surface-container-low": "#161b2b",
+                    "on-primary": "#3c0091",
+                    "secondary-fixed-dim": "#c0c1ff",
+                    "on-secondary-fixed-variant": "#2f2ebe",
+                    "surface-container-high": "#25293a",
+                    "outline-variant": "#494454",
+                    "primary": "#d0bcff",
+                    "primary-container": "#a078ff",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-secondary": "#1000a9",
+                    "tertiary": "#4cd7f6",
+                    "on-background": "#dee1f7",
+                    "on-secondary-fixed": "#07006c",
+                    "surface": "#0e1322",
+                    "surface-bright": "#343949",
+                    "on-surface": "#dee1f7",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-tertiary": "#003640",
+                    "on-secondary-container": "#b0b2ff",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-tertiary-container": "#002f38",
+                    "error-container": "#93000a",
+                    "surface-variant": "#2f3445",
+                    "secondary": "#c0c1ff",
+                    "outline": "#958ea0",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#23005c",
+                    "surface-tint": "#d0bcff",
+                    "surface-container-lowest": "#090e1c",
+                    "secondary-container": "#3131c0",
+                    "inverse-surface": "#dee1f7",
+                    "inverse-on-surface": "#2b3040"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1440px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "label-sm": ["DM Sans"],
+                    "label-bold": ["DM Sans"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-md": ["DM Sans"],
+                    "body-lg": ["DM Sans"],
+                    "display-xl": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-edge {
+            border: 1px solid;
+            border-image-source: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%);
+            border-image-slice: 1;
+        }
+        .ai-glow-orb {
+            filter: blur(80px);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background Orbs for Depth -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none">
+<div class="ai-glow-orb absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full"></div>
+<div class="ai-glow-orb absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-secondary-container/30 rounded-full"></div>
+</div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between px-8 h-20 w-full">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent font-sans tracking-tight antialiased">MediFinder AI</span>
+<nav class="hidden md:flex gap-8">
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 font-sans tracking-tight antialiased" href="#">Diagnostics</a>
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 font-sans tracking-tight antialiased" href="#">Patient Records</a>
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 font-sans tracking-tight antialiased" href="#">AI Insights</a>
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 font-sans tracking-tight antialiased" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-white/5 rounded-full px-4 py-2 border border-white/10">
+<span class="material-symbols-outlined text-slate-400 text-lg mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-slate-500 w-48" placeholder="Search systems..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-violet-400 transition-colors">notifications</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-violet-400 transition-colors">settings</button>
+<button class="bg-gradient-to-r from-indigo-500 to-violet-500 text-white px-6 py-2 rounded-lg font-label-bold active:scale-95 transition-transform">Consult AI</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full border border-white/20 object-cover" data-alt="Close up portrait of a professional male doctor with a kind expression in a clinical setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcUOH_X190GopD0sRBXbukEj-tWQH1i03V61TyxxPPR-XkTX5F7bvWqAJvxBrbsCkHgArmjTOT05yXIuYlNZO52vIEG7kOfZDp847NEk7LjE1Fu8zUbmB8Gb4qRfYX2fd793gESKcq7CMGM9yVzwLMUCJHYrPqqGOga6rOHrXbU6lBWH0tCi_Z9_w71_XOZ7ym453gp624j8nq3PI0Kwb9QecSuJXPMYGElnUn-65-zX3eQJ6hKsR09KpN6ct_VFJTJcIcT7UDCMU"/>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-gutter max-w-container-max mx-auto relative z-10">
+<!-- Hero Section -->
+<div class="mb-xl text-center">
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full font-label-bold text-label-sm border border-primary/20 mb-4 inline-block">Security &amp; Compliance</span>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-md">Privacy Policy</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                At MediFinder AI, your data security and patient confidentiality are our highest clinical priorities. This policy outlines our rigorous standards for HIPAA compliance and AI data processing.
+            </p>
+</div>
+<!-- Content Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Table of Contents (Sidebar Sticky) -->
+<aside class="lg:col-span-3 space-y-base">
+<div class="glass-card rounded-xl p-md sticky top-24">
+<h3 class="font-label-bold text-label-bold text-primary mb-4">ON THIS PAGE</h3>
+<ul class="space-y-4">
+<li><a class="text-primary font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#data-collection"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Data Collection</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#ai-processing">AI Processing Ethics</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#hipaa">HIPAA Standards</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#retention">Data Retention</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#contact">Legal Contact</a></li>
+</ul>
+</div>
+</aside>
+<!-- Main Document Canvas -->
+<div class="lg:col-span-9 space-y-lg">
+<!-- Section 1 -->
+<section class="glass-card rounded-xl p-lg" id="data-collection">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">database</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Collection &amp; Ingestion</h2>
+</div>
+<div class="space-y-4 text-on-surface-variant font-body-md leading-relaxed">
+<p>We collect diagnostic data, imaging files, and clinical notes solely for the purpose of generating AI-driven insights. All data is encrypted at rest using AES-256 standards and in transit via TLS 1.3.</p>
+<ul class="list-disc pl-6 space-y-2 marker:text-primary">
+<li>Patient Identifiable Information (PII) is automatically de-identified before entering the AI core.</li>
+<li>Metadata including timestamps and diagnostic equipment IDs are logged for auditing purposes.</li>
+<li>User interaction data is tracked to improve diagnostic accuracy.</li>
+</ul>
+</div>
+</section>
+<!-- Section 2: AI Processing -->
+<section class="glass-card rounded-xl p-lg relative overflow-hidden" id="ai-processing">
+<div class="absolute top-0 right-0 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="flex items-center gap-4 mb-md">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary">psychology</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">AI Processing Ethics</h2>
+</div>
+<p class="text-on-surface-variant font-body-md mb-md">
+                        MediFinder AI employs a "Zero-Trust Inference" model. Your clinical data is never used to train global models shared with other healthcare institutions without explicit, granular consent.
+                    </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="p-md bg-white/5 rounded-lg border border-white/5">
+<span class="font-label-bold text-primary block mb-1">Local Inference</span>
+<p class="text-sm opacity-80">All initial screenings are performed on localized, sandboxed environments.</p>
+</div>
+<div class="p-md bg-white/5 rounded-lg border border-white/5">
+<span class="font-label-bold text-primary block mb-1">Audit Trail</span>
+<p class="text-sm opacity-80">Every AI suggestion is timestamped and linked to its original diagnostic source.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: HIPAA -->
+<section class="glass-card rounded-xl p-lg" id="hipaa">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center border border-primary-container/30">
+<span class="material-symbols-outlined text-primary-container">verified_user</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">HIPAA Compliance</h2>
+</div>
+<p class="text-on-surface-variant font-body-md mb-md">
+                        MediFinder AI is fully compliant with the Health Insurance Portability and Accountability Act (HIPAA). Our systems undergo quarterly third-party audits to ensure the integrity of protected health information (PHI).
+                    </p>
+<div class="bg-surface-container-low p-md rounded-lg border-l-4 border-primary">
+<p class="italic text-sm">"Clinical integrity is maintained through rigorous administrative, physical, and technical safeguards." - Chief Compliance Officer</p>
+</div>
+</section>
+<!-- Section 4: Retention -->
+<section class="glass-card rounded-xl p-lg" id="retention">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-outline">history_toggle_off</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Retention</h2>
+</div>
+<p class="text-on-surface-variant font-body-md">
+                        Records are retained in accordance with medical statutory requirements (typically 7 years for adults). Users may request data purging at any time, subject to legal overrides regarding clinical record keeping.
+                    </p>
+</section>
+<!-- Section 5: Contact -->
+<section class="p-lg bg-gradient-to-br from-indigo-500/10 to-violet-500/10 rounded-xl border border-primary/20" id="contact">
+<h2 class="font-headline-md text-headline-md text-primary mb-sm">Privacy &amp; Legal Inquiry</h2>
+<p class="text-on-surface-variant mb-md">For matters regarding HIPAA BAA agreements or data access requests:</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="font-label-bold">privacy@medifinder.ai</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-label-bold">San Francisco HQ</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 border-t border-white/5 w-full py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-lg font-semibold text-slate-200">MediFinder AI</span>
+<p class="text-sm font-light tracking-wide text-slate-500">© 2024 MediFinder AI. Clinical Intelligence Systems.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-violet-400 font-semibold transition-colors font-body-md" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-colors font-body-md" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-colors font-body-md" href="#">HIPAA Compliance</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-colors font-body-md" href="#">Support</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors">public</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors">security</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors">hub</span>
+</div>
+</div>
+</footer>
+</body></html>

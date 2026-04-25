@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paracetamol Details | MediFinder AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#2f3445",
+                        "surface-container": "#1a1f2f",
+                        "tertiary-container": "#009eb9",
+                        "secondary-fixed": "#e1e0ff",
+                        "surface-dim": "#0e1322",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "inverse-primary": "#6d3bd7",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "primary-fixed": "#e9ddff",
+                        "tertiary-fixed": "#acedff",
+                        "background": "#0e1322",
+                        "on-tertiary-fixed": "#001f26",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-primary-container": "#340080",
+                        "surface-container-low": "#161b2b",
+                        "on-primary": "#3c0091",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "surface-container-high": "#25293a",
+                        "outline-variant": "#494454",
+                        "primary": "#d0bcff",
+                        "primary-container": "#a078ff",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-secondary": "#1000a9",
+                        "tertiary": "#4cd7f6",
+                        "on-background": "#dee1f7",
+                        "on-secondary-fixed": "#07006c",
+                        "surface": "#0e1322",
+                        "surface-bright": "#343949",
+                        "on-surface": "#dee1f7",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "on-tertiary": "#003640",
+                        "on-secondary-container": "#b0b2ff",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary-container": "#002f38",
+                        "error-container": "#93000a",
+                        "surface-variant": "#2f3445",
+                        "secondary": "#c0c1ff",
+                        "outline": "#958ea0",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#23005c",
+                        "surface-tint": "#d0bcff",
+                        "surface-container-lowest": "#090e1c",
+                        "secondary-container": "#3131c0",
+                        "inverse-surface": "#dee1f7",
+                        "inverse-on-surface": "#2b3040"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1440px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "label-sm": ["DM Sans"],
+                        "label-bold": ["DM Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "body-lg": ["DM Sans"],
+                        "display-xl": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-edge {
+            border-image: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0.05)) 1;
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(160, 120, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between px-8 h-20 w-full font-sans tracking-tight antialiased">
+<div class="flex items-center gap-12">
+<h1 class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">MediFinder AI</h1>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 active:scale-95" href="#">Diagnostics</a>
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 active:scale-95" href="#">Patient Records</a>
+<a class="text-violet-400 border-b-2 border-violet-500 pb-1 hover:text-violet-300 hover:bg-white/5 transition-all duration-300 active:scale-95" href="#">AI Insights</a>
+<a class="text-slate-400 font-medium hover:text-violet-300 hover:bg-white/5 transition-all duration-300 active:scale-95" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-400">
+<span class="material-symbols-outlined hover:text-indigo-400 cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined hover:text-indigo-400 cursor-pointer transition-colors" data-icon="settings">settings</span>
+</div>
+<button class="bg-gradient-to-r from-primary-container to-inverse-primary text-on-primary-container px-6 py-2 rounded-full font-label-bold active:scale-95 transition-transform">
+                Consult AI
+            </button>
+<div class="w-10 h-10 rounded-full border border-white/20 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional portrait of a medical doctor in a sterile clinic setting with soft clinical lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB15QATLMS9xGB77PerRt-uJLbP1ARxAbazSMBXUzPGSRXfPQA3NTdFBkPffimQounNWPrGo9kHcvshzemxxAN-Uq64BOtm6ZEyTzsQk6NTFaHqxaLWn2GFTxHySbY6tDfpKJaPg-iNe6Fvddl8fpgQ14LCVcJVRZxqz59WiulLrZO_TksV1s2pgt_l9HvSCl5ABPAjv6lt0xnHLlu2VCbt1KeI-jDfeGfmx3nv2mVcPMWABv7ASKiUMVVFazRRDT_24XfdntqnKuI"/>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-8 max-w-[1440px] mx-auto">
+<!-- Hero Section: Drug Header -->
+<div class="grid grid-cols-12 gap-gutter mb-lg">
+<div class="col-span-12 lg:col-span-8 flex flex-col justify-center">
+<div class="flex items-center gap-4 mb-4">
+<span class="bg-primary-container/20 text-primary-container px-3 py-1 rounded-full text-label-sm font-label-bold border border-primary-container/30">Analgesic</span>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full text-label-sm font-label-bold border border-tertiary-container/30">Antipyretic</span>
+</div>
+<h2 class="font-display-xl text-display-xl text-white mb-2">Paracetamol (Acetaminophen)</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Widely used over-the-counter analgesic and antipyretic for the relief of mild to moderate pain and fever.</p>
+</div>
+<div class="col-span-12 lg:col-span-4">
+<div class="glass-card p-6 rounded-xl ai-glow relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-violet-400" data-icon="clinical_notes">clinical_notes</span>
+<h3 class="font-label-bold text-label-bold text-violet-300 uppercase tracking-widest">AI Status Report</h3>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full border-2 border-violet-500/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-violet-400" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-white">Optimal Safety</p>
+<p class="text-sm text-slate-400">Interaction scan complete</p>
+</div>
+</div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-indigo-500 to-violet-500 w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Side Panel: Molecular & Specs -->
+<div class="col-span-12 md:col-span-4 space-y-gutter">
+<div class="glass-card p-8 rounded-xl">
+<h4 class="font-headline-md text-headline-md text-white mb-6 border-b border-white/10 pb-4">Molecular Insight</h4>
+<div class="aspect-square rounded-lg mb-6 bg-slate-900/50 flex items-center justify-center border border-white/5 overflow-hidden">
+<img alt="Molecular structure" class="w-full h-full object-cover mix-blend-screen opacity-80" data-alt="high-tech 3D visualization of a molecular structure with glowing atoms and blue neon connections on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVLn4jbYlklgLXMfbSTUJpwt8rxUbvpK9CVKG0FVD1v_SucQE6erW2Q5_SrQmPhyZkzmwWvT429ZJwddemZZDUfHjzALZUJfQaP7fLbR1vX6bFt9aE4WHgPBV8B_WaKgai067bY9Xy9Q4KSSlPx-slYgDwH2ZKwmFeeOh1EE985vSsLHF5MX-IG5vfDu3_wwRnLZjCuwpHDNiBCHHtBDGEcX3O5zIYQ7D4dq-rl9B4fpljKj-x6LEeqocK3yrwvY08Z-azRs6HEhM"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-slate-400 font-label-sm">Formula</span>
+<span class="text-indigo-300 font-label-bold">C<sub>8</sub>H<sub>9</sub>NO<sub>2</sub></span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 font-label-sm">Molar Mass</span>
+<span class="text-indigo-300 font-label-bold">151.16 g/mol</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 font-label-sm">Bioavailability</span>
+<span class="text-indigo-300 font-label-bold">85–98%</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl bg-gradient-to-b from-surface-container to-surface-container-low">
+<h4 class="font-headline-md text-headline-md text-white mb-4">Patient Advisory</h4>
+<p class="text-slate-400 mb-6 font-body-md">Recommended for patients with sensitivity to aspirin or non-steroidal anti-inflammatory drugs (NSAIDs).</p>
+<div class="p-4 bg-error-container/10 border border-error/20 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div class="text-xs text-on-surface-variant">
+<strong class="text-error block mb-1">Hepatic Warning</strong>
+                            Severe liver damage may occur if more than 4,000 mg is taken in 24 hours.
+                        </div>
+</div>
+</div>
+</div>
+<!-- Main Panel: Mechanism & Interaction -->
+<div class="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="col-span-2 glass-card p-8 rounded-xl">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h4 class="font-headline-md text-headline-md text-white mb-2">Mechanism of Action</h4>
+<p class="text-slate-400 font-body-md">AI-Driven Pharmacodynamic Analysis</p>
+</div>
+<button class="text-violet-400 flex items-center gap-1 hover:underline font-label-bold">
+                            View Simulation <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="p-4 bg-white/5 rounded-lg border border-white/5">
+<span class="material-symbols-outlined text-indigo-400 mb-2" data-icon="psychology">psychology</span>
+<p class="text-sm font-label-bold text-white mb-1">CNS Inhibition</p>
+<p class="text-xs text-slate-500 leading-relaxed">Predominantly inhibits prostaglandin synthesis in the central nervous system.</p>
+</div>
+<div class="p-4 bg-white/5 rounded-lg border border-white/5">
+<span class="material-symbols-outlined text-violet-400 mb-2" data-icon="thermostat">thermostat</span>
+<p class="text-sm font-label-bold text-white mb-1">Hypothalamic Effect</p>
+<p class="text-xs text-slate-500 leading-relaxed">Acts directly on the hypothalamic heat-regulating center to lower fever.</p>
+</div>
+<div class="p-4 bg-white/5 rounded-lg border border-white/5">
+<span class="material-symbols-outlined text-tertiary mb-2" data-icon="fluid_medication">fluid_med</span>
+<p class="text-sm font-label-bold text-white mb-1">Selective COX</p>
+<p class="text-xs text-slate-500 leading-relaxed">Possesses weak anti-inflammatory activity due to poor COX-1/2 inhibition in periphery.</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col h-full">
+<h4 class="font-headline-md text-headline-md text-white mb-6">Clinical Interactions</h4>
+<div class="space-y-4 flex-grow">
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-sm font-label-bold">Alcohol</span>
+</div>
+<span class="text-xs text-error font-bold px-2 py-1 bg-error/10 rounded">SEVERE</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+<span class="text-sm font-label-bold">Warfarin</span>
+</div>
+<span class="text-xs text-yellow-400 font-bold px-2 py-1 bg-yellow-400/10 rounded">MODERATE</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-green-400"></div>
+<span class="text-sm font-label-bold">Carbamazepine</span>
+</div>
+<span class="text-xs text-green-400 font-bold px-2 py-1 bg-green-400/10 rounded">LOW</span>
+</div>
+</div>
+<button class="mt-6 w-full py-3 rounded-lg border border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/10 transition-colors font-label-bold">
+                        Detailed Scan Report
+                    </button>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col h-full">
+<h4 class="font-headline-md text-headline-md text-white mb-6">AI Dosage Guidance</h4>
+<div class="flex-grow flex flex-col justify-center text-center">
+<div class="text-5xl font-bold text-white mb-2">500<span class="text-2xl text-slate-500 ml-1">mg</span></div>
+<p class="text-slate-400 font-label-sm uppercase tracking-widest mb-6">Standard Unit Dose</p>
+<div class="flex items-center justify-center gap-6 text-sm">
+<div>
+<span class="block text-slate-500 mb-1">Max/24h</span>
+<span class="text-white font-bold">4,000mg</span>
+</div>
+<div class="w-[1px] h-8 bg-white/10"></div>
+<div>
+<span class="block text-slate-500 mb-1">Interval</span>
+<span class="text-white font-bold">4-6 Hours</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-2 glass-card p-8 rounded-xl">
+<h4 class="font-headline-md text-headline-md text-white mb-6">Historical AI Analysis Trend</h4>
+<div class="h-48 w-full bg-slate-900/30 rounded-lg relative overflow-hidden flex items-end px-4 pb-4">
+<!-- Simulated Chart -->
+<div class="flex w-full items-end justify-between gap-2 h-32">
+<div class="w-full bg-indigo-500/20 rounded-t h-[40%]"></div>
+<div class="w-full bg-indigo-500/30 rounded-t h-[60%]"></div>
+<div class="w-full bg-indigo-500/40 rounded-t h-[55%]"></div>
+<div class="w-full bg-violet-500/50 rounded-t h-[80%] border-t-2 border-violet-400"></div>
+<div class="w-full bg-indigo-500/40 rounded-t h-[70%]"></div>
+<div class="w-full bg-indigo-500/30 rounded-t h-[85%]"></div>
+<div class="w-full bg-violet-500/60 rounded-t h-[100%] border-t-2 border-violet-400 shadow-[0_0_15px_rgba(167,139,250,0.5)]"></div>
+<div class="w-full bg-indigo-500/40 rounded-t h-[75%]"></div>
+</div>
+<div class="absolute top-4 right-8 flex items-center gap-4 text-xs font-label-bold text-slate-400">
+<span class="flex items-center gap-1"><i class="w-2 h-2 rounded-full bg-indigo-500"></i> Efficacy</span>
+<span class="flex items-center gap-1"><i class="w-2 h-2 rounded-full bg-violet-400"></i> AI Confidence</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 border-t border-white/5 w-full py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-center md:text-left">
+<span class="text-lg font-semibold text-slate-200 block mb-1">MediFinder AI</span>
+<p class="text-sm font-light tracking-wide text-slate-500">© 2024 MediFinder AI. Clinical Intelligence Systems.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 text-sm font-light tracking-wide hover:text-indigo-300 transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 text-sm font-light tracking-wide hover:text-indigo-300 transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 text-sm font-light tracking-wide hover:text-indigo-300 transition-colors" href="#">HIPAA Compliance</a>
+<a class="text-slate-500 text-sm font-light tracking-wide hover:text-indigo-300 transition-colors" href="#">Support</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-600 hover:text-violet-400 cursor-pointer" data-icon="share">share</span>
+<span class="material-symbols-outlined text-slate-600 hover:text-violet-400 cursor-pointer" data-icon="print">print</span>
+<span class="material-symbols-outlined text-slate-600 hover:text-violet-400 cursor-pointer" data-icon="mail">mail</span>
+</div>
+</div>
+</footer>
+</body></html>
