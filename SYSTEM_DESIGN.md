@@ -4,7 +4,7 @@ This document outlines the architecture, logic flow, and system structure of the
 
 ## 🏗 Architecture Overview
 
-MediFinder AI is built as a single-page application (SPA) using **React** and **Vite**, following a modular component-based architecture. It operates primarily as an interface between the user and Large Language Models (LLMs) via the **OpenRouter API**.
+MediFinder AI is built as a single-page application (SPA) using **Next.js** and **React**, following a modular component-based architecture. It operates primarily as an interface between the user and Large Language Models (LLMs) via the **OpenRouter API** (powered by **Claude AI**).
 
 ### 1. Logic & Data Flow
 The system follows a stateless data flow:

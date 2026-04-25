@@ -14,11 +14,11 @@ MediFinder AI is a professional, high-performance medicine search engine and med
 
 ## 🛠 Tech Stack
 
-- **Frontend**: React (Vite), TypeScript, Lucide React (Icons).
-- **Styling**: Vanilla CSS3 (Custom Design System).
-- **AI Integration**: OpenRouter API (Claude 3.5 Sonnet / GPT-4o Mini).
+- **Frontend**: Next.js 14 (App Router), React 18, TypeScript.
+- **Styling**: Vanilla CSS3 with Custom Design System tokens.
+- **AI Integration**: Claude 3.5 Sonnet (via OpenRouter API).
 - **External APIs**: Google Maps JavaScript API, Google Places API.
-- **State Management**: React Hooks & LocalStorage.
+- **State Management**: React Context & LocalStorage.
 
 ## 📦 Getting Started
 

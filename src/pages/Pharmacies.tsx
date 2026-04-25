@@ -135,6 +135,7 @@ export const Pharmacies = () => {
           ) : (
             pharmacies.map(p => (
               <div key={p.id} className="pharmacy-card" onClick={() => map.setCenter(p.location)}>
+                {/* ... existing card content ... */}
                 <h3 style={{ fontSize: 18, marginBottom: 8 }}>{p.name}</h3>
                 <p className="text-muted" style={{ fontSize: 14, marginBottom: 8 }}>{p.address}</p>
                 <div className="flex items-center justify-between mb-4">
@@ -162,6 +163,20 @@ export const Pharmacies = () => {
               </div>
             ))
           )}
+          
+          <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
+            <h4 style={{ marginBottom: 12 }}>{isUrdu ? 'اکثر پوچھے گئے سوالات' : 'Pharmacy Finder FAQ'}</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ fontSize: 13 }}>
+                <strong>{isUrdu ? 'مقام کیسے تلاش کریں؟' : 'How does it find my location?'}</strong>
+                <p className="text-muted">{isUrdu ? 'ہم آپ کے براؤزر کا جیو لوکیشن استعمال کرتے ہیں۔' : 'We use your browser\'s secure Geolocation API to find pharmacies near you.'}</p>
+              </div>
+              <div style={{ fontSize: 13 }}>
+                <strong>{isUrdu ? 'کیا یہ معلومات درست ہیں؟' : 'Is the information accurate?'}</strong>
+                <p className="text-muted">{isUrdu ? 'یہ ڈیٹا براہ راست گوگل میپس سے حاصل کیا جاتا ہے۔' : 'Data is fetched in real-time from Google Maps. Check the "Open Now" status before visiting.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

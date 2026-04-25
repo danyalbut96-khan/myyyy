@@ -90,6 +90,8 @@ export const SafetyChecker = () => {
                 </div>
               </div>
             </div>
+          )}
+        </div>
         {/* FAQ & Instructions */}
         <div className="max-w-2xl mx-auto mt-16 pt-10 border-t" style={{ borderColor: 'var(--border)' }}>
           <h2 className="text-center mb-8" style={{ fontSize: 24 }}>{isUrdu ? 'استعمال کرنے کا طریقہ' : 'How to Use'}</h2>

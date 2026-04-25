@@ -189,6 +189,7 @@ export const Prescription = () => {
               <ArrowRight size={20} /> {isUrdu ? 'پہلی دوا تلاش کریں' : 'Search First Medicine'}
             </button>
           </div>
+        )}
         {/* FAQ Section */}
         <div className="max-w-3xl mx-auto mt-20 pt-10 border-t" style={{ borderColor: 'var(--border)' }}>
           <h2 className="text-center mb-10" style={{ fontSize: 28 }}>{isUrdu ? 'اکثر پوچھے گئے سوالات' : 'Frequently Asked Questions'}</h2>
