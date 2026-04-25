@@ -65,7 +65,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color: var(--text-primary);
+  color: var(--text-main);
   line-height: 1.2;
 }
 
@@ -167,7 +167,7 @@ button {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -296,7 +296,7 @@ button {
 }
 .btn-secondary {
   background-color: var(--surface);
-  color: var(--text-primary);
+  color: var(--text-main);
   border: 1px solid var(--border);
   padding: 10px 20px;
   border-radius: var(--radius-pill);
@@ -324,7 +324,7 @@ button {
   border: 1px solid var(--border);
   background-color: var(--surface);
   font-size: 18px;
-  color: var(--text-primary);
+  color: var(--text-main);
   font-family: var(--font-body);
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
@@ -444,7 +444,8 @@ button {
   font-size: 18px;
   margin-bottom: 12px;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-main);
 }
 .feature-card p {
   color: var(--text-secondary);
@@ -555,7 +556,7 @@ button {
 .alt-name {
   font-weight: 600;
   font-size: 17px;
-  color: var(--text-primary);
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
@@ -832,7 +833,7 @@ html[dir="rtl"] .search-submit {
   align-self: flex-start;
   background-color: var(--surface);
   border: 1px solid var(--border);
-  color: var(--text-primary);
+  color: var(--text-main);
   padding: 14px 20px;
   border-radius: 20px 20px 20px 4px;
   display: flex;

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, Share2, Globe, Send, Link as LinkIcon, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Share2, Globe, Send, Link as LinkIcon, MessageSquare, CheckCircle } from 'lucide-react';
 import { MOCK_BLOGS, type Blog } from '../services/api';
 
 export const BlogDetail = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
   useEffect(() => {
@@ -16,10 +17,63 @@ export const BlogDetail = () => {
     }
   }, [id]);
 
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleShare = (platform: string) => {
+    const url = window.location.href;
+    const text = `Check out this health article: ${blog?.title}`;
+    
+    if (platform === 'copy') {
+      navigator.clipboard.writeText(url);
+      showToast(isUrdu ? 'لنک کاپی ہو گیا!' : 'Link copied to clipboard!');
+    } else if (platform === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+    } else if (platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+    } else {
+      if (navigator.share) {
+        navigator.share({ title: blog?.title, text, url });
+      } else {
+        navigator.clipboard.writeText(url);
+        showToast(isUrdu ? 'لنک کاپی ہو گیا!' : 'Link copied to clipboard!');
+      }
+    }
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    showToast(isUrdu ? 'یہ فیچر جلد آ رہا ہے!' : 'This feature will be coming soon!');
+  };
+
   if (!blog) return <div className="container section text-center">Blog not found</div>;
 
   return (
-    <div className="fade-up">
+    <div className="fade-up" style={{ position: 'relative' }}>
+      {/* Toast Notification */}
+      {toast && (
+        <div style={{
+          position: 'fixed',
+          top: '100px',
+          right: '24px',
+          backgroundColor: 'var(--accent-primary)',
+          color: 'white',
+          padding: '12px 24px',
+          borderRadius: '12px',
+          boxShadow: 'var(--card-shadow)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          zIndex: 2000,
+          animation: 'slideInRight 0.3s ease-out'
+        }}>
+          <CheckCircle size={18} />
+          <span style={{ fontWeight: 600 }}>{toast}</span>
+        </div>
+      )}
+
       {/* Blog Header */}
       <div style={{ backgroundColor: 'var(--bg-color)', borderBottom: '1px solid var(--border)', padding: '60px 0' }}>
         <div className="container">
@@ -85,10 +139,10 @@ export const BlogDetail = () => {
                 <p className="text-muted text-sm">{isUrdu ? 'صحت کے بارے میں شعور پھیلانے میں ہماری مدد کریں۔' : 'Help us spread awareness about health and wellness.'}</p>
               </div>
               <div className="flex gap-3">
-                <button className="btn-secondary" style={{ padding: '12px' }}><Globe size={20} /></button>
-                <button className="btn-secondary" style={{ padding: '12px' }}><Send size={20} /></button>
-                <button className="btn-secondary" style={{ padding: '12px' }}><Share2 size={20} /></button>
-                <button className="btn-secondary" style={{ padding: '12px' }}><LinkIcon size={20} /></button>
+                <button onClick={() => handleShare('facebook')} className="btn-secondary" style={{ padding: '12px' }}><Globe size={20} /></button>
+                <button onClick={() => handleShare('twitter')} className="btn-secondary" style={{ padding: '12px' }}><Send size={20} /></button>
+                <button onClick={() => handleShare('native')} className="btn-secondary" style={{ padding: '12px' }}><Share2 size={20} /></button>
+                <button onClick={() => handleShare('copy')} className="btn-secondary" style={{ padding: '12px' }}><LinkIcon size={20} /></button>
               </div>
             </div>
           </div>
@@ -100,10 +154,10 @@ export const BlogDetail = () => {
               <span style={{ fontWeight: 700 }}>{isUrdu ? 'ہمارے نیوز لیٹر میں شامل ہوں' : 'Join our Newsletter'}</span>
             </div>
             <p className="text-muted mb-6">{isUrdu ? 'تازہ ترین ہیلتھ ٹپس براہ راست اپنے ان باکس میں حاصل کریں۔' : 'Get the latest health tips delivered directly to your inbox.'}</p>
-            <div className="flex max-w-md mx-auto gap-2">
-              <input type="email" placeholder="Email address" className="search-input" style={{ padding: '12px 20px', margin: 0 }} />
-              <button className="btn-primary">{isUrdu ? 'سبسکرائب' : 'Subscribe'}</button>
-            </div>
+            <form onSubmit={handleSubscribe} className="flex max-w-md mx-auto gap-2">
+              <input type="email" placeholder="Email address" className="search-input" style={{ padding: '12px 20px', margin: 0 }} required />
+              <button type="submit" className="btn-primary">{isUrdu ? 'سبسکرائب' : 'Subscribe'}</button>
+            </form>
           </div>
         </div>
       </article>

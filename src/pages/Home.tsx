@@ -1,6 +1,6 @@
 import { useState, useEffect, type FormEvent, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, BookOpen, Clock, Camera } from 'lucide-react';
+import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, BookOpen, Clock, Camera, CheckCircle } from 'lucide-react';
 import { fetchBlogs, type Blog } from '../services/api';
 
 const COMMON_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen', 'Lisinopril', 'Metformin', 'Aspirin'];
@@ -13,9 +13,15 @@ export const Home = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
+  const [toast, setToast] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
+
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const words = isUrdu 
     ? ['ادویات', 'خوراک', 'متبادل', 'اثرات', 'قیمت'] 
@@ -118,7 +124,29 @@ export const Home = () => {
   };
 
   return (
-    <div className="fade-up">
+    <div className="fade-up" style={{ position: 'relative' }}>
+      {/* Toast Notification */}
+      {toast && (
+        <div style={{
+          position: 'fixed',
+          top: '100px',
+          right: '24px',
+          backgroundColor: 'var(--accent-primary)',
+          color: 'white',
+          padding: '12px 24px',
+          borderRadius: '12px',
+          boxShadow: 'var(--card-shadow)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          zIndex: 2000,
+          animation: 'slideInRight 0.3s ease-out'
+        }}>
+          <CheckCircle size={18} />
+          <span style={{ fontWeight: 600 }}>{toast}</span>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="section text-center" style={{ paddingTop: '100px', paddingBottom: '40px' }}>
         <div className="container">
@@ -128,7 +156,7 @@ export const Home = () => {
             </span>
           </div>
           
-          <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', marginBottom: '24px' }}>
+          <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', marginBottom: '24px', color: 'var(--text-main)' }}>
             {isUrdu ? (
               <>دوائیں <i className="text-primary-accent" style={{ borderRight: '3px solid', paddingRight: '4px' }}>{displayText}</i> <br />دریافت کریں</>
             ) : (
@@ -316,9 +344,9 @@ export const Home = () => {
               : 'Create your account and store your medical history (like diabetes or hypertension). MediFinder will automatically warn you about medications that might be unsafe for your specific condition.'}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="chip" style={{ opacity: 0.7 }}><ShieldAlert size={14} /> {isUrdu ? 'سمارٹ الرٹس' : 'Smart Alerts'}</div>
-            <div className="chip" style={{ opacity: 0.7 }}><History size={14} /> {isUrdu ? 'تاریخ کا مطالعہ' : 'Full History Sync'}</div>
-            <div className="chip" style={{ opacity: 0.7 }}><FlaskConical size={14} /> {isUrdu ? 'ذاتی تجاویز' : 'Personalized Recommendations'}</div>
+            <div className="chip" style={{ opacity: 0.7, cursor: 'pointer' }} onClick={() => showToast(isUrdu ? 'یہ فیچر جلد آ رہا ہے!' : 'This feature will be coming soon!')}><ShieldAlert size={14} /> {isUrdu ? 'سمارٹ الرٹس' : 'Smart Alerts'}</div>
+            <div className="chip" style={{ opacity: 0.7, cursor: 'pointer' }} onClick={() => showToast(isUrdu ? 'یہ فیچر جلد آ رہا ہے!' : 'This feature will be coming soon!')}><History size={14} /> {isUrdu ? 'تاریخ کا مطالعہ' : 'Full History Sync'}</div>
+            <div className="chip" style={{ opacity: 0.7, cursor: 'pointer' }} onClick={() => showToast(isUrdu ? 'یہ فیچر جلد آ رہا ہے!' : 'This feature will be coming soon!')}><FlaskConical size={14} /> {isUrdu ? 'ذاتی تجاویز' : 'Personalized Recommendations'}</div>
           </div>
         </div>
       </section>
