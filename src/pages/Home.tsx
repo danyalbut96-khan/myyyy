@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, Newspaper, ExternalLink, Calendar } from 'lucide-react';
 import { fetchHealthNews, type HealthNewsItem } from '../services/api';
 
