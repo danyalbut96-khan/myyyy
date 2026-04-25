@@ -5,6 +5,11 @@ import { Result } from './pages/Result';
 import { About } from './pages/About';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { Terms } from './pages/Terms';
+import { SafetyChecker } from './pages/SafetyChecker';
+import { Compare } from './pages/Compare';
+import { Pharmacies } from './pages/Pharmacies';
+import { Prescription } from './pages/Prescription';
+import { Chat } from './pages/Chat';
 
 function App() {
   return (
@@ -16,6 +21,11 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="terms" element={<Terms />} />
+          <Route path="safety" element={<SafetyChecker />} />
+          <Route path="compare" element={<Compare />} />
+          <Route path="pharmacies" element={<Pharmacies />} />
+          <Route path="prescription" element={<Prescription />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Routes>
     </Router>
