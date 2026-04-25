@@ -7,7 +7,7 @@ export const Compare = () => {
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
   const [searchParams] = useSearchParams();
   const initialBrand = searchParams.get('brand') || '';
-  const initialGeneric = searchParams.get('generic') || '';
+  // const initialGeneric = searchParams.get('generic') || '';
 
   const [brand, setBrand] = useState(initialBrand);
   // const [generic, setGeneric] = useState(initialGeneric);

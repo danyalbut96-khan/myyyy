@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Pill, Send, Plus } from 'lucide-react';
 import { chatWithBot } from '../services/api';
 import type { ChatMessage, ChatSession } from '../types';
-import { useNavigate } from 'react-router-dom';
 
 export const Chat = () => {
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';

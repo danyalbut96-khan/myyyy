@@ -61,7 +61,7 @@ export const ChatBot = () => {
 
   const handleSearchClick = (_query: string) => {
     setIsOpen(false);
-    navigate(`/result?q=${encodeURIComponent(query)}`);
+    navigate(`/result?q=${encodeURIComponent(_query)}`);
   };
 
   const renderMessageContent = (content: string) => {

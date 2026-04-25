@@ -8,6 +8,7 @@ export const Home = () => {
   const [query, setQuery] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const navigate = useNavigate();
+  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
   useEffect(() => {
     const savedHistory = localStorage.getItem('medifinder_history');
@@ -59,16 +60,23 @@ export const Home = () => {
       <section className="section text-center" style={{ paddingTop: '100px' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
-            <span className="badge badge-green">✦ AI-Powered Medicine Search</span>
+            <span className="badge badge-green">
+              {isUrdu ? '✦ اے آئی پر مبنی میڈیسن سرچ' : '✦ AI-Powered Medicine Search'}
+            </span>
           </div>
           
-          <h1 style={{ fontSize: 'clamp(42px, 8vw, 72px)', marginBottom: '24px' }}>
-            Discover <i className="text-primary-accent">Medicine</i><br />
-            Details Instantly
+          <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', marginBottom: '24px' }}>
+            {isUrdu ? (
+              <>دوائیں فوری طور پر <br /><i className="text-primary-accent">دریافت کریں</i></>
+            ) : (
+              <>Discover <i className="text-primary-accent">Medicine</i><br />Details Instantly</>
+            )}
           </h1>
           
           <p className="text-muted mx-auto" style={{ maxWidth: '520px', fontSize: '18px', fontWeight: 300, marginBottom: '48px' }}>
-            Enter any medicine name to get comprehensive, AI-powered details including composition, uses, dosage, side effects, and alternatives.
+            {isUrdu 
+              ? 'جامع، اے آئی سے چلنے والی تفصیلات بشمول اجزاء، استعمال، خوراک، مضر اثرات اور متبادل حاصل کرنے کے لیے دوا کا نام درج کریں۔'
+              : 'Enter any medicine name to get comprehensive, AI-powered details including composition, uses, dosage, side effects, and alternatives.'}
           </p>
 
           <form onSubmit={handleSearch} className="search-wrapper mb-8">
@@ -76,7 +84,7 @@ export const Home = () => {
             <input
               type="text"
               className="search-input"
-              placeholder="e.g. Paracetamol, Adderall, Lipitor…"
+              placeholder={isUrdu ? 'مثلاً پیناڈول، امیکسیلین...' : 'e.g. Paracetamol, Adderall, Lipitor…'}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -86,7 +94,9 @@ export const Home = () => {
           </form>
 
           <div className="flex flex-col items-center gap-4">
-            <span className="text-muted" style={{ fontSize: '14px' }}>Or try one of these common medicines:</span>
+            <span className="text-muted" style={{ fontSize: '14px' }}>
+              {isUrdu ? 'یا ان عام ادویات میں سے کوئی آزمائیں:' : 'Or try one of these common medicines:'}
+            </span>
             <div className="flex flex-wrap justify-center gap-3 max-w-xl">
               {COMMON_MEDICINES.map((med) => (
                 <button
@@ -109,33 +119,45 @@ export const Home = () => {
           <div className="features-grid">
             <div className="feature-card">
               <div className="icon-box"><FlaskConical size={24} /></div>
-              <h3>Complete Composition</h3>
-              <p>Detailed breakdown of chemical formulas and active salts ensuring you know exactly what is inside.</p>
+              <h3>{isUrdu ? 'مکمل اجزاء' : 'Complete Composition'}</h3>
+              <p>{isUrdu 
+                ? 'کیمیائی فارمولوں اور فعال نمکیات کی تفصیلی تفصیل تاکہ آپ کو معلوم ہو کہ اندر کیا ہے۔'
+                : 'Detailed breakdown of chemical formulas and active salts ensuring you know exactly what is inside.'}</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><Stethoscope size={24} /></div>
-              <h3>Dosage & Usage</h3>
-              <p>Clear, AI-summarized instructions on how the medication is typically administered and utilized.</p>
+              <h3>{isUrdu ? 'خوراک اور استعمال' : 'Dosage & Usage'}</h3>
+              <p>{isUrdu
+                ? 'واضح، اے آئی سے خلاصہ شدہ ہدایات کہ دوا عام طور پر کیسے دی جاتی ہے اور استعمال کی جاتی ہے۔'
+                : 'Clear, AI-summarized instructions on how the medication is typically administered and utilized.'}</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><RefreshCw size={24} /></div>
-              <h3>Smart Alternatives</h3>
-              <p>Find comparable generic and brand alternatives instantly with matching therapeutic effects.</p>
+              <h3>{isUrdu ? 'سمارٹ متبادل' : 'Smart Alternatives'}</h3>
+              <p>{isUrdu
+                ? 'مماثل علاج کے اثرات کے ساتھ فوری طور پر قابل موازنہ جینرک اور برانڈ متبادل تلاش کریں۔'
+                : 'Find comparable generic and brand alternatives instantly with matching therapeutic effects.'}</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><AlertTriangle size={24} /></div>
-              <h3>Side Effects</h3>
-              <p>Comprehensive overview of potential side effects ranging from common to severe reactions.</p>
+              <h3>{isUrdu ? 'مضر اثرات' : 'Side Effects'}</h3>
+              <p>{isUrdu
+                ? 'ممکنہ مضر اثرات کا جامع جائزہ جو عام سے لے کر شدید ردعمل تک ہوتا ہے۔'
+                : 'Comprehensive overview of potential side effects ranging from common to severe reactions.'}</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><ShieldAlert size={24} /></div>
-              <h3>Drug Interactions</h3>
-              <p>Identify critical contraindications and potential interactions with other common medications.</p>
+              <h3>{isUrdu ? 'دوائیوں کے تعاملات' : 'Drug Interactions'}</h3>
+              <p>{isUrdu
+                ? 'دیگر عام ادویات کے ساتھ اہم تضادات اور ممکنہ تعاملات کی شناخت کریں۔'
+                : 'Identify critical contraindications and potential interactions with other common medications.'}</p>
             </div>
             <div className="feature-card">
               <div className="icon-box"><History size={24} /></div>
-              <h3>Search History</h3>
-              <p>Keep track of your latest inquiries with a quick-access history log saved securely on your device.</p>
+              <h3>{isUrdu ? 'تلاش کی تاریخ' : 'Search History'}</h3>
+              <p>{isUrdu
+                ? 'آپ کے آلے پر محفوظ کردہ کوئیک ایکسیس ہسٹری لاگ کے ساتھ اپنی تازہ ترین پوچھ گچھ کا ٹریک رکھیں۔'
+                : 'Keep track of your latest inquiries with a quick-access history log saved securely on your device.'}</p>
             </div>
           </div>
         </div>
@@ -145,9 +167,9 @@ export const Home = () => {
       {history.length > 0 && (
         <section className="section container">
           <div className="flex items-center justify-between mb-6">
-            <h2 style={{ fontSize: '24px' }}>Recent Searches</h2>
+            <h2 style={{ fontSize: '24px' }}>{isUrdu ? 'حالیہ تلاش' : 'Recent Searches'}</h2>
             <button onClick={clearHistory} className="text-muted" style={{ fontSize: '14px', textDecoration: 'underline' }}>
-              Clear All
+              {isUrdu ? 'سب صاف کریں' : 'Clear All'}
             </button>
           </div>
           <div className="flex flex-wrap gap-3">
