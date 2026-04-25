@@ -125,7 +125,7 @@ const Footer = () => {
               <Link to="/" className="footer-logo">
                 MediFinder <span>AI</span>
               </Link>
-              <p className="text-secondary" style={{ color: '#A0A09A' }}>
+              <p className="text-secondary">
                 {isUrdu
                   ? "جدید ترین اے آئی پر مبنی میڈیسن سرچ انجن جو ادویات کی تفصیلی معلومات فوری فراہم کرتا ہے۔"
                   : "Advanced AI-powered medicine search engine providing detailed pharmaceutical information instantly."}

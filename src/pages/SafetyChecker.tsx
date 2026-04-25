@@ -25,7 +25,7 @@ export const SafetyChecker = () => {
 
   return (
     <div className="fade-up">
-      <section className="section text-center" style={{ backgroundColor: 'white' }}>
+      <section className="section text-center" style={{ backgroundColor: 'var(--bg-color)' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-amber">{isUrdu ? 'حفاظتی جانچ' : 'Safety Checker'}</span>
@@ -76,16 +76,16 @@ export const SafetyChecker = () => {
 
           {result && (
             <div className="info-card fade-up" style={{ 
-              backgroundColor: result.severity === 'Severe' ? '#fee2e2' : result.severity === 'Moderate' ? '#ffedd5' : result.severity === 'Mild' ? '#fef9c3' : '#dcfce7',
-              borderColor: result.severity === 'Severe' ? '#f87171' : result.severity === 'Moderate' ? '#fb923c' : result.severity === 'Mild' ? '#fde047' : '#86efac'
+              backgroundColor: 'var(--surface-alt)',
+              borderColor: 'var(--border)'
             }}>
-              <div className="info-header" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
-                {result.severity === 'Severe' && <div className="icon-sm" style={{ backgroundColor: '#fef2f2', color: 'red' }}><AlertTriangle size={18} /></div>}
-                <h3 style={{ margin: 0, color: '#1a1a1a' }}>Severity: {result.severity}</h3>
+              <div className="info-header" style={{ borderColor: 'var(--border)' }}>
+                {result.severity === 'Severe' && <div className="icon-sm" style={{ backgroundColor: 'var(--surface)', color: 'var(--warning-text)' }}><AlertTriangle size={18} /></div>}
+                <h3 style={{ margin: 0, color: 'var(--text-main)' }}>Severity: {result.severity}</h3>
               </div>
-              <div className="info-content" style={{ color: '#333' }}>
+              <div className="info-content" style={{ color: 'var(--text-main)' }}>
                 <p style={{ marginBottom: 16 }}>{result.description}</p>
-                <div className="badge" style={{ backgroundColor: 'white', color: '#1a1a1a', padding: '12px 20px', display: 'flex', fontSize: 16 }}>
+                <div className="badge" style={{ backgroundColor: 'var(--surface)', color: 'var(--text-main)', padding: '12px 20px', display: 'flex', fontSize: 16 }}>
                   💡 {result.recommendation}
                 </div>
               </div>

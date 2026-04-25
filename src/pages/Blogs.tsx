@@ -27,7 +27,7 @@ export const Blogs = () => {
   return (
     <div className="fade-up">
       {/* Header */}
-      <section className="section bg-light text-center" style={{ padding: '80px 0' }}>
+      <section className="section bg-light text-center" style={{ padding: '80px 0', backgroundColor: 'var(--surface-alt)' }}>
         <div className="container">
           <div className="flex justify-center mb-6">
             <span className="badge badge-green">

@@ -82,6 +82,29 @@ button {
   transition: var(--transition);
 }
 
+.bg-light {
+  background-color: var(--surface-alt);
+}
+
+.text-secondary {
+  color: var(--text-muted);
+}
+
+/* Print Styles */
+@media print {
+  .navbar, .footer, .chatbot-fab, .chatbot-panel, .header-actions, .disclaimer-bar {
+    display: none !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
 /* Utilities */
 .container {
   width: 100%;
