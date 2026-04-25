@@ -251,38 +251,87 @@ IMPORTANT:
   return data.choices[0].message.content;
 };
 
-export interface HealthNewsItem {
+export interface Blog {
   id: string;
   title: string;
   summary: string;
-  source: string;
-  url: string;
+  content: string;
+  author: string;
   date: string;
   category: string;
-  imagePrompt: string;
-  imageUrl?: string;
+  image: string;
+  image2?: string;
+  readTime: string;
 }
 
-export const fetchHealthNews = async (): Promise<HealthNewsItem[]> => {
-  const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
-  const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  
-  const content = await fetchApi(
-    [{ 
-      role: 'user', 
-      content: `Provide 6 highly relevant and recent health/medical news items as of ${currentDate}. 
-      Respond ONLY with a JSON array of objects: [{id, title, summary, source, url, date, category, imagePrompt}]. 
-      Summaries should be 2-3 sentences. Categories like "Research", "Lifestyle", "Public Health", etc. 
-      Image prompts should be descriptive for an AI image generator. 
-      ${isUrdu ? "Important: Translate titles and summaries to Urdu (Nastaliq script) but keep source names and URLs in English." : ""}` 
-    }],
-    `You are a medical news aggregator. Return ONLY raw JSON array.`
-  );
+export const MOCK_BLOGS: Blog[] = [
+  {
+    id: '1',
+    title: '5 Natural Ways to Boost Your Immunity This Season',
+    summary: 'Discover simple lifestyle changes and dietary tips to strengthen your immune system naturally.',
+    content: `A strong immune system is your body's first line of defense against illnesses. While genetics play a role, your lifestyle and diet significantly influence how well your immune system functions. Here are five science-backed ways to give your immunity a natural boost:
 
-  try {
-    return JSON.parse(content) as HealthNewsItem[];
-  } catch (error) {
-    console.error("Failed to parse health news:", content);
-    return [];
+1. Prioritize Quality Sleep: During sleep, your immune system releases proteins called cytokines, which help fight infections and inflammation. Chronic sleep deprivation can decrease the production of these protective cytokines and infection-fighting antibodies. Aim for 7-9 hours of restful sleep each night.
+
+2. Eat a Rainbow of Plant Foods: Fruits, vegetables, nuts, and seeds are rich in nutrients and antioxidants that may give you an upper hand against harmful pathogens. Antioxidants help decrease inflammation by combatting unstable compounds called free radicals.
+
+3. Stay Active: Moderate exercise can reduce inflammation and help your immune cells regenerate regularly. Examples of moderate exercise include brisk walking, steady bicycling, and light hiking.
+
+4. Manage Stress Levels: Long-term stress promotes inflammation, as well as imbalances in immune cell function. Activities like meditation, yoga, and deep breathing can help keep your stress hormones in check.
+
+5. Stay Hydrated: While hydration doesn't necessarily protect you from germs and viruses, preventing dehydration is important to your overall health. Dehydration can cause headaches and hinder your physical performance, focus, and heart and kidney function.`,
+    author: 'Dr. Sarah Ahmed',
+    date: 'Oct 12, 2023',
+    category: 'Immunity',
+    image: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?q=80&w=800',
+    image2: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800',
+    readTime: '5 min'
+  },
+  {
+    id: '2',
+    title: 'Understanding Vitamin D: The Sunshine Nutrient',
+    summary: 'Everything you need to know about Vitamin D deficiency, benefits, and sources.',
+    content: `Vitamin D is unique because it's the only nutrient your body produces when exposed to sunlight. Often called the "sunshine vitamin," it plays a crucial role in maintaining healthy bones and teeth, and it may also provide protection against a range of diseases.
+
+Why Vitamin D Matters:
+The primary function of Vitamin D is to help your body absorb calcium and phosphorus from your diet. This is essential for building and maintaining strong bones. Research also suggests that Vitamin D may support immune health, regulate mood, and even reduce the risk of certain cancers.
+
+Signs of Deficiency:
+Many people are deficient without realizing it. Common symptoms include frequent infections, fatigue, bone and back pain, and slow wound healing. If you live in a northern climate or spend most of your time indoors, you might be at higher risk.
+
+How to Get Enough:
+While sunlight is the best source, you can also find Vitamin D in fatty fish (like salmon and mackerel), egg yolks, and fortified foods like milk and cereal. In many cases, a supplement may be necessary, especially during the winter months. Always consult with your healthcare provider before starting a new supplement regimen.`,
+    author: 'Prof. Mark Wilson',
+    date: 'Oct 15, 2023',
+    category: 'Nutrition',
+    image: 'https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=800',
+    image2: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800',
+    readTime: '4 min'
+  },
+  {
+    id: '3',
+    title: 'Mental Health: Breaking the Stigma in 2023',
+    summary: 'Why mental wellness is just as important as physical health and how to prioritize it.',
+    content: `For too long, mental health has been treated as a secondary concern. However, in recent years, there's been a global shift toward recognizing that mental wellness is foundational to overall health.
+
+Prioritizing your mental health isn't a luxury; it's a necessity. Chronic stress and untreated mental health conditions can lead to physical ailments, including heart disease and a weakened immune system.
+
+Steps Toward Better Mental Health:
+1. Practice Mindfulness: Spending even five minutes a day in quiet reflection or meditation can significantly lower cortisol levels.
+2. Set Boundaries: Learn to say no to commitments that drain your energy.
+3. Seek Professional Help: Talking to a therapist or counselor is a sign of strength, not weakness.
+4. Connect with Others: Human connection is a powerful antidote to loneliness and anxiety.
+
+Remember, it's okay not to be okay. The first step toward healing is acknowledging your feelings and reaching out for support.`,
+    author: 'Dr. Jane Smith',
+    date: 'Oct 20, 2023',
+    category: 'Mental Health',
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800',
+    image2: 'https://images.unsplash.com/photo-1527137342181-19aab11a8ee1?q=80&w=800',
+    readTime: '6 min'
   }
+];
+
+export const fetchBlogs = async (): Promise<Blog[]> => {
+  return MOCK_BLOGS;
 };

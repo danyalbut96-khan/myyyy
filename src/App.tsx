@@ -10,6 +10,7 @@ import { Compare } from './pages/Compare';
 import { Pharmacies } from './pages/Pharmacies';
 import { Prescription } from './pages/Prescription';
 import { Chat } from './pages/Chat';
+import { BlogDetail } from './pages/BlogDetail';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="pharmacies" element={<Pharmacies />} />
           <Route path="prescription" element={<Prescription />} />
           <Route path="chat" element={<Chat />} />
+          <Route path="blog/:id" element={<BlogDetail />} />
         </Route>
       </Routes>
     </Router>

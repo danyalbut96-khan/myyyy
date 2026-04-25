@@ -1,7 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, Newspaper } from 'lucide-react';
-import { fetchHealthNews, type HealthNewsItem } from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
+import { Search, ArrowRight, X, FlaskConical, Stethoscope, RefreshCw, AlertTriangle, ShieldAlert, History, BookOpen, Clock, User } from 'lucide-react';
+import { fetchBlogs, type Blog } from '../services/api';
 
 const COMMON_MEDICINES = ['Paracetamol', 'Amoxicillin', 'Omeprazole', 'Ibuprofen', 'Lisinopril', 'Metformin', 'Aspirin'];
 
@@ -11,8 +11,8 @@ export const Home = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [news, setNews] = useState<HealthNewsItem[]>([]);
-  const [loadingNews, setLoadingNews] = useState(true);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loadingBlogs, setLoadingBlogs] = useState(true);
   const navigate = useNavigate();
   const isUrdu = localStorage.getItem('medifinder_lang') === 'ur';
 
@@ -21,18 +21,20 @@ export const Home = () => {
     : ['Medicine', 'Dosage', 'Side Effects', 'Alternatives', 'Prices'];
 
   useEffect(() => {
-    const loadNews = async () => {
+    const loadBlogs = async () => {
       try {
-        const newsData = await fetchHealthNews();
-        setNews(newsData);
+        const blogData = await fetchBlogs();
+        setBlogs(blogData);
       } catch (e) {
         console.error(e);
       } finally {
-        setLoadingNews(false);
+        setLoadingBlogs(false);
       }
     };
-    loadNews();
+    loadBlogs();
   }, []);
+
+  // ... (existing text animation effect remains same)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -155,29 +157,27 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Health News Section */}
+      {/* Health Blog Section */}
       <section className="section bg-light" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
           <div className="flex items-center justify-between mb-10">
             <div>
               <div className="flex items-center gap-2 text-primary-accent font-semibold mb-2">
-                <Newspaper size={20} />
-                <span>{isUrdu ? 'تازہ ترین ہیلتھ اپڈیٹس' : 'Latest Health Updates'}</span>
+                <BookOpen size={20} />
+                <span>{isUrdu ? 'ہمارا ہیلتھ بلاگ' : 'Our Health Blog'}</span>
               </div>
               <h2 style={{ fontSize: 'clamp(28px, 4vw, 36px)', fontWeight: 800 }}>
-                {isUrdu ? 'صحت کی دنیا سے اہم خبریں' : 'Top Medical & Health News'}
+                {isUrdu ? 'صحت کے بارے میں مفید مضامین' : 'Insights for Better Living'}
               </h2>
             </div>
-            {!loadingNews && (
-              <button onClick={() => window.location.reload()} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '14px' }}>
-                <RefreshCw size={16} /> {isUrdu ? 'ریفریش' : 'Refresh'}
-              </button>
-            )}
+            <Link to="/blogs" className="btn-secondary" style={{ padding: '8px 16px', fontSize: '14px' }}>
+              {isUrdu ? 'تمام دیکھیں' : 'View All Blogs'}
+            </Link>
           </div>
 
-          {loadingNews ? (
+          {loadingBlogs ? (
             <div className="news-grid">
-              {[1, 2, 3, 4].map((i) => (
+              {[1, 2, 3].map((i) => (
                 <div key={i} className="news-card" style={{ height: 320 }}>
                   <div className="news-image-wrapper skeleton-loading"></div>
                   <div className="news-content">
@@ -189,39 +189,33 @@ export const Home = () => {
             </div>
           ) : (
             <div className="news-grid">
-              {news.slice(0, 4).map((item) => (
-                <a 
-                  key={item.id} 
-                  href={item.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+              {blogs.map((blog) => (
+                <Link 
+                  key={blog.id} 
+                  to={`/blog/${blog.id}`}
                   className="news-card group"
                 >
                   <div className="news-image-wrapper">
                     <img 
-                      src={`https://images.unsplash.com/photo-${item.id}?auto=format&fit=crop&q=80&w=600&fallback=https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=600`} 
-                      alt={item.title} 
+                      src={blog.image} 
+                      alt={blog.title} 
                       className="news-image"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1505751172107-5739a00723a5?q=80&w=600';
-                      }}
                     />
-                    <div className="news-category-badge">{item.category}</div>
+                    <div className="news-category-badge">{blog.category}</div>
                   </div>
                   <div className="news-content">
-                    <div className="flex items-center gap-2 text-xs text-muted mb-2">
-                      <span>{item.date}</span>
-                      <span>•</span>
-                      <span>{item.source}</span>
+                    <div className="flex items-center gap-3 text-xs text-muted mb-2">
+                      <span className="flex items-center gap-1"><Clock size={12} /> {blog.readTime}</span>
+                      <span className="flex items-center gap-1"><User size={12} /> {blog.author}</span>
                     </div>
                     <h3 className="news-title group-hover:text-primary-accent transition-colors">
-                      {item.title}
+                      {blog.title}
                     </h3>
                     <p className="news-summary">
-                      {item.summary}
+                      {blog.summary}
                     </p>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           )}
@@ -321,6 +315,9 @@ export const Home = () => {
               </div>
             ))}
           </div>
+        </section>
+      )}
+    </div>
         </section>
       )}
     </div>
