@@ -1,37 +1,68 @@
 export const About = () => {
   return (
-    <div className="container fade-in">
-      <div className="prose card mt-12">
-        <h1 className="text-gradient">About MediFinder AI</h1>
-        
-        <p>
-          MediFinder AI is a cutting-edge platform designed to demystify complex medical information. 
-          By leveraging advanced artificial intelligence, we provide users with instantly accessible, 
-          comprehensive details about thousands of medications.
-        </p>
-
-        <h2>Our Mission</h2>
-        <p>
-          Our mission is to empower individuals with accurate, easy-to-understand pharmaceutical knowledge. 
-          We believe that everyone deserves to know exactly what they are putting into their bodies, 
-          the potential side effects, and viable alternatives.
-        </p>
-
-        <h2>The Team</h2>
-        <p>
-          We are a dedicated group of technologists and healthcare advocates committed to building 
-          bridges between complex medical databases and everyday consumers.
-        </p>
-
-        <div className="mt-8 p-6" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <h3 className="mb-2 text-accent-teal">Disclaimer</h3>
-          <p className="text-sm">
-            MediFinder AI is an informational tool powered by artificial intelligence. While we strive for accuracy, 
-            AI-generated content can occasionally be incomplete or outdated. Always consult with a qualified 
-            healthcare provider, pharmacist, or physician before starting, stopping, or changing any medication regimen.
+    <div className="fade-up">
+      {/* Hero Section */}
+      <section className="section text-center" style={{ backgroundColor: 'white' }}>
+        <div className="container">
+          <div className="flex justify-center mb-6">
+            <span className="badge badge-green">About MediFinder AI</span>
+          </div>
+          
+          <h1 style={{ fontSize: 'clamp(36px, 6vw, 64px)', marginBottom: '24px' }}>
+            Bridging Medicine &<br />
+            <i className="text-primary-accent">Technology</i>
+          </h1>
+          
+          <p className="text-muted mx-auto" style={{ maxWidth: '600px', fontSize: '18px', fontWeight: 300 }}>
+            We leverage advanced artificial intelligence to make complex medical data accessible, understandable, and actionable for everyone.
           </p>
         </div>
-      </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="section container">
+        <div className="prose">
+          <h2>Our Mission</h2>
+          <p>
+            MediFinder AI was created with a singular vision: to democratize medical information. 
+            Navigating pharmaceutical details, understanding chemical compositions, and identifying potential 
+            side effects shouldn't require a medical degree. We aim to bridge the gap between complex medical 
+            jargon and everyday understanding.
+          </p>
+          <p>
+            By synthesizing vast amounts of medical data into clear, actionable insights, we empower 
+            individuals to make informed decisions about their health while providing a valuable reference 
+            tool for healthcare professionals.
+          </p>
+
+          <h2>How It Works</h2>
+          <p>
+            When you search for a medication, MediFinder AI utilizes state-of-the-art Large Language Models, 
+            specifically <strong>Claude AI</strong>, to instantly query, analyze, and structure pharmaceutical data.
+          </p>
+          <p>
+            The system cross-references active ingredients, dosages, and interactions to generate a comprehensive 
+            profile of the requested medicine. It even identifies comparable therapeutic alternatives to help users 
+            understand generic vs. brand-name options available in the market.
+          </p>
+
+          <h2>Technology Stack</h2>
+          <div className="flex gap-4" style={{ marginTop: '24px', flexWrap: 'wrap' }}>
+            <span className="badge" style={{ backgroundColor: '#000', color: '#fff' }}>Next.js / React</span>
+            <span className="badge" style={{ backgroundColor: '#D97757', color: '#fff' }}>Claude AI</span>
+            <span className="badge" style={{ backgroundColor: '#000', color: '#fff' }}>Vercel</span>
+          </div>
+
+          <div className="disclaimer-box">
+            <h3><span style={{ fontSize: '20px' }}>⚠️</span> Disclaimer</h3>
+            <p>
+              MediFinder AI is an informational tool and is not a substitute for professional medical advice, 
+              diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider 
+              with any questions you may have regarding a medical condition or medication.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

@@ -14,6 +14,9 @@ export interface MedicineDetails {
   dosage: string;
   sideEffects: string;
   contraindications: string;
+  drugInteractions: string;
+  storageInstructions: string;
+  pregnancyCategory: string;
   manufacturer: string;
   summary: string;
   alternatives: MedicineAlternative[];

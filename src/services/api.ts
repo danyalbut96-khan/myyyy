@@ -15,6 +15,9 @@ The JSON object MUST perfectly match this structure:
   "dosage": "String",
   "sideEffects": "String",
   "contraindications": "String",
+  "drugInteractions": "String",
+  "storageInstructions": "String",
+  "pregnancyCategory": "String",
   "manufacturer": "String",
   "summary": "Plain language summary (2-3 sentences)",
   "alternatives": [
