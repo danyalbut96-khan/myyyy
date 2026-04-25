@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Pill } from 'lucide-react';
 import { chatWithBot } from '../services/api';
 import type { ChatMessage } from '../types';
-import { useNavigate } from 'react-router-dom';
 
 export const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
